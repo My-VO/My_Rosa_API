@@ -2,20 +2,24 @@
   "name": "my_rosa_back",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
+    "start": "node src/index.js",
+    "start:dev": "nodemon src/index.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/My-VO/My_Rosa_API.git"
+    "url": "git+https://github.com/My-VO/My_Rosa_Back.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/My-VO/My_Rosa_API/issues"
+    "url": "https://github.com/My-VO/My_Rosa_Back/issues"
   },
-  "homepage": "https://github.com/My-VO/My_Rosa_API#readme",
+  "homepage": "https://github.com/My-VO/My_Rosa_Back#readme",
   "devDependencies": {
     "eslint": "^7.2.0",
     "eslint-config-airbnb-base": "^14.2.0",
@@ -24,9 +28,12 @@
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.1.4",
+    "nodemon": "^2.0.4",
     "prettier": "^2.1.1"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0"
   }
 }
