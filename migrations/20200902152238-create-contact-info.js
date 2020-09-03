@@ -1,12 +1,16 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Contact_Infos', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
+    await queryInterface.createTable('ContactInfos', {
+      user_id: {
         type: Sequelize.INTEGER,
+        references: {
+          allowNull: false,
+          model: {
+            tableName: 'Users',
+          },
+          key: 'user_id',
+        },
       },
       delivery_address: {
         type: Sequelize.TEXT,
@@ -20,14 +24,16 @@ module.exports = {
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW'),
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW'),
       },
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Contact_Infos');
+    await queryInterface.dropTable('ContactInfos');
   },
 };

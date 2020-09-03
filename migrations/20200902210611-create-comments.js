@@ -2,7 +2,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Comments', {
-      id: {
+      comment_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -10,6 +10,12 @@ module.exports = {
       },
       user_id: {
         type: Sequelize.INTEGER,
+        references: {
+          allowNull: false,
+          model: {
+            tableName: 'Users',
+          },
+          key: 'user_id',
       },
       item_id: {
         type: Sequelize.INTEGER,
@@ -19,6 +25,12 @@ module.exports = {
       },
       picture: {
         type: Sequelize.TEXT,
+        references: {
+          allowNull: false,
+          model: {
+            tableName: 'Items',
+          },
+          key: 'item_id',
       },
       date_creation: {
         type: Sequelize.DATE,
@@ -26,10 +38,12 @@ module.exports = {
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW'),
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW'),
       },
     });
   },
