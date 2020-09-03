@@ -1,17 +1,16 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Contact_Info extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+  class ContactInfo extends Model {
     static associate(models) {
-      // define association here
+      this.belongsTo(models.Users, {
+        foreignKey: {
+          name: 'user_id',
+        },
+      });
     }
   }
-  Contact_Info.init(
+  ContactInfo.init(
     {
       delivery_address: DataTypes.TEXT,
       bill_address: DataTypes.TEXT,
@@ -19,8 +18,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'Contact_Info',
+      modelName: 'ContactInfo',
     }
   );
-  return Contact_Info;
+  return ContactInfo;
 };
