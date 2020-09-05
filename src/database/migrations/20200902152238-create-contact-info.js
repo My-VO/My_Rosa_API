@@ -9,7 +9,7 @@ module.exports = {
           model: {
             tableName: 'Users',
           },
-          key: 'user_id',
+          key: 'id',
         },
       },
       delivery_address: {
