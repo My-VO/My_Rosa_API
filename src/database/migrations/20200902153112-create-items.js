@@ -11,11 +11,17 @@ module.exports = {
       name: {
         type: Sequelize.TEXT,
       },
-      price_potted: {
+      price_pot: {
         type: Sequelize.BIGINT,
       },
-      price_bare_root: {
+      stock_quantity_pot: {
+        type: Sequelize.INTEGER,
+      },
+      price_root: {
         type: Sequelize.BIGINT,
+      },
+      stock_quantity_root: {
+        type: Sequelize.INTEGER,
       },
       variety: {
         type: Sequelize.TEXT,
@@ -38,18 +44,15 @@ module.exports = {
       ideal_for: {
         type: Sequelize.TEXT,
       },
-      stock_quantity: {
-        type: Sequelize.INTEGER,
-      },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('NOW'),
+        defaultValue: Sequelize.NOW,
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('NOW'),
+        defaultValue: Sequelize.NOW,
       },
     });
   },

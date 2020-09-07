@@ -1,24 +1,57 @@
-'use strict';
-const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class PicturesItem extends Model {
-    static associate(models) {
-      this.belongsTo(models.Items, {
-        foreignKey: {
-          name: 'item_id',
-        },
-      });
-    }
-  }
-  PicturesItem.init(
+  const PicturesItem = sequelize.define(
+    'PicturesItem',
     {
-      item_id: DataTypes.INTEGER,
-      picture: DataTypes.TEXT,
+      item_id: {
+        field: 'item_id',
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        references: {
+          model: {
+            tableName: 'Items',
+          },
+          key: 'item_id',
+        },
+      },
+      picture: {
+        allowNull: false,
+        type: DataTypes.TEXT,
+      },
+      createdAt: {
+        field: 'create_at',
+        allowNull: false,
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
+        validate: {
+          isDate: true,
+          notNull: true,
+        },
+      },
+      updatedAt: {
+        field: 'updated_at',
+        allowNull: false,
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
+        validate: {
+          isDate: true,
+          notNull: true,
+        },
+      },
     },
     {
-      sequelize,
-      modelName: 'PicturesItem',
+      tableName: 'Pictures_Item',
     }
   );
+
+  PicturesItem.associate = (models) => {
+    PicturesItem.belongsTo(models.Items, {
+      onDelete: 'CASCADE',
+      foreignKey: {
+        name: 'itemId',
+        allowNull: false,
+      },
+    });
+  };
+
   return PicturesItem;
 };

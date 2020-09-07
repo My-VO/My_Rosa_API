@@ -1,9 +1,9 @@
 const userDTO = {
   convert2DTO: async (user) => {
     return {
-      id: user.id,
-      first_name: user.first_name,
-      last_name: user.last_name,
+      id: user.userId,
+      first_name: user.firstName,
+      last_name: user.lastName,
       email: user.email,
     };
   },

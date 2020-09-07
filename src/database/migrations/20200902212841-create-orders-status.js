@@ -1,11 +1,12 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('OrdersStatus', {
+    await queryInterface.createTable('Orders_Status', {
       order_id: {
+        allowNull: false,
         type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
         references: {
-          allowNull: false,
           model: {
             tableName: 'Orders',
           },
@@ -13,9 +14,10 @@ module.exports = {
         },
       },
       status_id: {
+        allowNull: false,
         type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
         references: {
-          allowNull: false,
           model: {
             tableName: 'Status',
           },
@@ -23,21 +25,12 @@ module.exports = {
         },
       },
       status_date: {
-        type: Sequelize.DATE,
-      },
-      createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('NOW'),
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('NOW'),
       },
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('OrdersStatus');
+    await queryInterface.dropTable('Orders_Status');
   },
 };

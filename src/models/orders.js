@@ -1,34 +1,46 @@
-'use strict';
-const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Orders extends Model {
-    static associate(models) {
-      this.belongsTo(models.Users, {
-        foreignKey: {
-          name: 'user_id',
-        },
-      });
-      this.hasMany(models.OrderItems, {
-        foreignKey: {
-          name: 'order_id',
-        },
-      });
-      this.hasMany(models.OrdersStatus, {
-        foreignKey: {
-          name: 'order_id',
-        },
-      });
-    }
-  }
-  Orders.init(
+  const Orders = sequelize.define(
+    'Orders',
     {
-      user_id: DataTypes.INTEGER,
-      order_date: DataTypes.DATE,
+      orderId: {
+        field: 'order_id',
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER,
+      },
+      userId: {
+        field: 'user_id',
+        allowNull: false,
+        type: DataTypes.INTEGER,
+      },
+      orderDate: {
+        field: 'order_date',
+        allowNull: false,
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
+        validate: {
+          isDate: true,
+          notNull: true,
+        },
+      },
     },
     {
-      sequelize,
-      modelName: 'Orders',
+      tableName: 'Orders',
     }
   );
+
+  Orders.associate = (models) => {
+    Orders.belongsTo(models.Users, {
+      onDelete: 'CASCADE',
+      foreignKey: {
+        name: 'userId',
+        allowNull: false,
+      },
+    });
+    Orders.hasMany(models.OrderItems);
+    Orders.hasMany(models.OrdersStatus);
+  };
+
   return Orders;
 };
