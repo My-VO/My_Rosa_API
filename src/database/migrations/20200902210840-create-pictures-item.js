@@ -1,11 +1,12 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('PicturesItems', {
+    await queryInterface.createTable('Pictures_Items', {
       item_id: {
+        allowNull: false,
         type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
         references: {
-          allowNull: false,
           model: {
             tableName: 'Items',
           },
@@ -15,19 +16,19 @@ module.exports = {
       picture: {
         type: Sequelize.TEXT,
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('NOW'),
+        defaultValue: Sequelize.NOW,
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('NOW'),
+        defaultValue: Sequelize.NOW,
       },
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('PicturesItems');
+    await queryInterface.dropTable('Pictures_Items');
   },
 };

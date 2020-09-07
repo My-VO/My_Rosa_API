@@ -1,35 +1,48 @@
-'use strict';
-const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class OrdersStatus extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      this.belongsTo(models.Orders, {
-        foreignKey: {
-          name: 'order_id',
-        },
-      });
-      this.belongsTo(models.Status, {
-        foreignKey: {
-          name: 'status_id',
-        },
-      });
-    }
-  }
-  OrdersStatus.init(
+  const OrdersStatus = sequelize.define(
+    'OrdersStatus',
     {
-      order_id: DataTypes.INTEGER,
-      status_id: DataTypes.TEXT,
-      status_date: DataTypes.DATE,
+      orderId: {
+        field: 'order_id',
+        allowNull: false,
+        type: DataTypes.INTEGER,
+      },
+      statusId: {
+        field: 'status_id',
+        allowNull: false,
+        type: DataTypes.INTEGER,
+      },
+      statusDate: {
+        field: 'status_date',
+        allowNull: false,
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
+        validate: {
+          isDate: true,
+          notNull: true,
+        },
+      },
     },
     {
-      sequelize,
-      modelName: 'OrdersStatus',
+      tableName: 'Orders_Status',
     }
   );
+
+  OrdersStatus.associate = (models) => {
+    OrdersStatus.belongsTo(models.Orders, {
+      onDelete: 'CASCADE',
+      foreignKey: {
+        name: 'orderId',
+      },
+    });
+    OrdersStatus.belongsTo(models.Status, {
+      onDelete: 'CASCADE',
+      foreignKey: {
+        name: 'statusId',
+        allowNull: false,
+      },
+    });
+  };
+
   return OrdersStatus;
 };

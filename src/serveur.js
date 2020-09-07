@@ -1,19 +1,23 @@
-const express = require('express');
-const logger = require('morgan');
-const bodyParser = require('body-parser');
+const express = require("express");
+const helmet = require("helmet");
+const logger = require("morgan");
+const bodyParser = require("body-parser");
 
-const routes = require('./routes');
+const routes = require("./routes");
+
+const { notFoundHandler, errorLogger, errorHandler } = require("./middlewares");
 
 const server = express();
 
-server.use(logger('tiny'));
+server.use(helmet());
+server.use(logger("tiny"));
+server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
 
-server.use('/api', routes);
-server.use('/*', (request, reponse) => {
-  reponse.status(404).json({
-    error: 'Vous vous êtes trompé de route !',
-  });
-});
+server.use("/api", routes);
+
+server.use(notFoundHandler);
+server.use(errorLogger);
+server.unsubscribe(errorHandler);
 
 module.exports = server;

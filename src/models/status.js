@@ -1,23 +1,46 @@
-'use strict';
-const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Status extends Model {
-    static associate(models) {
-      this.hasMany(models.OrdersStatus, {
-        foreignKey: {
-          name: 'status_id',
-        },
-      });
-    }
-  }
-  Status.init(
+  const Status = sequelize.define(
+    'Status',
     {
-      description: DataTypes.TEXT,
+      statusId: {
+        field: 'status_id',
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER,
+      },
+      description: {
+        type: DataTypes.TEXT,
+      },
+      createdAt: {
+        field: 'created_at',
+        allowNull: false,
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
+        validate: {
+          isDate: true,
+          notNull: true,
+        },
+      },
+      updatedAt: {
+        field: 'updated_at',
+        allowNull: false,
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
+        validate: {
+          isDate: true,
+          notNull: true,
+        },
+      },
     },
     {
-      sequelize,
-      modelName: 'Status',
+      tableName: 'Status',
     }
   );
+
+  Status.associate = (models) => {
+    Status.hasMany(models.OrdersStatus);
+  };
+
   return Status;
 };

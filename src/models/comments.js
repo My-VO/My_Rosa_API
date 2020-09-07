@@ -1,32 +1,75 @@
-'use strict';
-const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Comments extends Model {
-    static associate(models) {
-      this.belongsTo(models.Users, {
-        foreignKey: {
-          name: 'user_id',
-        },
-      });
-      this.belongsTo(models.Items, {
-        foreignKey: {
-          name: 'item_id',
-        },
-      });
-    }
-  }
-  Comments.init(
+  const Comments = sequelize.define(
+    'Comments',
     {
-      user_id: DataTypes.INTEGER,
-      item_id: DataTypes.INTEGER,
-      comment: DataTypes.TEXT,
-      picture: DataTypes.TEXT,
-      date_creation: DataTypes.DATE,
+      commentId: {
+        field: 'comment_id',
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER,
+        validate: {
+          notNull: true,
+        },
+      },
+      userId: {
+        field: 'user_id',
+        allowNull: false,
+        type: DataTypes.INTEGER,
+      },
+      itemId: {
+        field: 'item_id',
+        allowNull: false,
+        type: DataTypes.INTEGER,
+      },
+      comment: {
+        type: DataTypes.TEXT,
+      },
+      picture: {
+        type: DataTypes.TEXT,
+      },
+      createdAt: {
+        field: 'create_at',
+        allowNull: false,
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
+        validate: {
+          isDate: true,
+          notNull: true,
+        },
+      },
+      updatedAt: {
+        field: 'updated_at',
+        allowNull: false,
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
+        validate: {
+          isDate: true,
+          notNull: true,
+        },
+      },
     },
     {
-      sequelize,
-      modelName: 'Comments',
+      tableName: 'Comments',
     }
   );
+
+  Comments.associate = (models) => {
+    Comments.belongsTo(models.Users, {
+      onDelete: 'CASCADE',
+      foreignKey: {
+        name: 'userId',
+        allowNull: false,
+      },
+    });
+    Comments.belongsTo(models.Items, {
+      onDelete: 'CASCADE',
+      foreignKey: {
+        name: 'itemId',
+        allowNull: false,
+      },
+    });
+  };
+
   return Comments;
 };

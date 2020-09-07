@@ -1,25 +1,62 @@
-'use strict';
-const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class ContactInfo extends Model {
-    static associate(models) {
-      this.belongsTo(models.Users, {
-        foreignKey: {
-          name: 'user_id',
-        },
-      });
-    }
-  }
-  ContactInfo.init(
+  const ContactInfo = sequelize.define(
+    'ContactInfo',
     {
-      delivery_address: DataTypes.TEXT,
-      bill_address: DataTypes.TEXT,
-      phone_number: DataTypes.INTEGER,
+      userId: {
+        field: 'user_id',
+        allowNull: false,
+        type: DataTypes.INTEGER,
+      },
+      deliveryAddress: {
+        field: 'delivery_address',
+        allowNull: false,
+        type: DataTypes.TEXT,
+      },
+      billAddress: {
+        field: 'bill_address',
+        allowNull: false,
+        type: DataTypes.TEXT,
+      },
+      phoneNumber: {
+        field: 'phone_number',
+        allowNull: false,
+        type: DataTypes.INTEGER,
+      },
+      createdAt: {
+        field: 'created_at',
+        allowNull: false,
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
+        validate: {
+          isDate: true,
+          notNull: true,
+        },
+      },
+      updatedAt: {
+        field: 'updated_at',
+        allowNull: false,
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
+        validate: {
+          isDate: true,
+          notNull: true,
+        },
+      },
     },
     {
-      sequelize,
-      modelName: 'ContactInfo',
+      tableName: 'Contact_Info',
     }
   );
+
+  ContactInfo.associate = (models) => {
+    ContactInfo.belongsTo(models.Users, {
+      onDelete: 'CASCADE',
+      foreignKey: {
+        name: 'userId',
+        allowNull: false,
+      },
+    });
+  };
+
   return ContactInfo;
 };

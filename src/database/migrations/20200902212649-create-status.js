@@ -1,4 +1,3 @@
-'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Status', {
@@ -9,17 +8,18 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       description: {
+        allowNull: false,
         type: Sequelize.TEXT,
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('NOW'),
+        defaultValue: Sequelize.NOW,
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('NOW'),
+        defaultValue: Sequelize.NOW,
       },
     });
   },
