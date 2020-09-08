@@ -1,7 +1,9 @@
 const express = require("express");
 const validateEmail = require("email-validator");
 
-const { CREATED } = require("../helpers/status_codes");
+const jwtUtils = require("../utils/jwt.utils");
+
+const { OK, CREATED } = require("../helpers/status_codes");
 const BadRequestError = require("../helpers/errors/bad_request_error");
 
 const usersController = require("../controllers/users_controller");
@@ -47,10 +49,20 @@ usersRouter.post("/signup", async (request, reponse) => {
   }
 
   const data = request.body;
+
   const newUser = await usersController.addUser(data);
 
   reponse.status(CREATED);
   reponse.json(newUser);
+});
+
+usersRouter.post("/signin", async (request, reponse) => {
+  const data = request.body;
+
+  const user = await usersController.authenticate(data);
+
+  reponse.status(OK);
+  reponse.json({ token: jwtUtils.genToken(user), user });
 });
 
 module.exports = usersRouter;

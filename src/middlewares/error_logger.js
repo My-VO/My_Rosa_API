@@ -1,4 +1,4 @@
-module.exports = (error, request, reponse, next) => {
-  console.log(`${error.name}\n ${error.description}`);
+module.exports = (error, request, response, next) => {
+  console.error(`${error.name}\n  ${error.description}`);
   next(error);
 };
