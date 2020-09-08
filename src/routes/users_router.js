@@ -1,10 +1,11 @@
 const express = require("express");
 const validateEmail = require("email-validator");
 
-const { CREATED } = require("../helpers/status_codes");
+const { OK, CREATED } = require("../helpers/status_codes");
 const BadRequestError = require("../helpers/errors/bad_request_error");
 
 const usersController = require("../controllers/users_controller");
+const { request } = require("express");
 
 const usersRouter = express.Router();
 
@@ -47,10 +48,20 @@ usersRouter.post("/signup", async (request, reponse) => {
   }
 
   const data = request.body;
+
   const newUser = await usersController.addUser(data);
 
   reponse.status(CREATED);
   reponse.json(newUser);
+});
+
+usersRouter.post("/signin", async (request, reponse) => {
+  const data = request.body;
+
+  const isIdentified = await usersController.authenticate(data);
+
+  reponse.status(OK);
+  reponse.json(isIdentified);
 });
 
 module.exports = usersRouter;

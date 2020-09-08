@@ -18,6 +18,6 @@ server.use("/api", routes);
 
 server.use(notFoundHandler);
 server.use(errorLogger);
-server.unsubscribe(errorHandler);
+server.use(errorHandler);
 
 module.exports = server;
