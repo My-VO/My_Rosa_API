@@ -1,16 +1,15 @@
-'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Pictures_Items', {
+    await queryInterface.createTable("Pictures_Item", {
       item_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        onDelete: 'CASCADE',
+        onDelete: "CASCADE",
         references: {
           model: {
-            tableName: 'Items',
+            tableName: "Items",
           },
-          key: 'item_id',
+          key: "item_id",
         },
       },
       picture: {
@@ -29,6 +28,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Pictures_Items');
+    await queryInterface.dropTable("Pictures_Item");
   },
 };

@@ -30,6 +30,7 @@ const usersController = {
       password: hashedPassword,
     });
     const newUserDTO = await userTDO.convert2DTO(newUser);
+
     return newUserDTO;
   },
 

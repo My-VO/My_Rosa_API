@@ -1,24 +1,24 @@
 module.exports = (sequelize, DataTypes) => {
   const PicturesItem = sequelize.define(
-    'PicturesItem',
+    "PicturesItem",
     {
       item_id: {
-        field: 'item_id',
+        field: "item_id",
         allowNull: false,
         type: DataTypes.INTEGER,
-        references: {
-          model: {
-            tableName: 'Items',
-          },
-          key: 'item_id',
-        },
+        // references: {
+        //   model: {
+        //     tableName: 'Items',
+        //   },
+        //   key: 'item_id',
+        // },
       },
       picture: {
         allowNull: false,
         type: DataTypes.TEXT,
       },
       createdAt: {
-        field: 'create_at',
+        field: "create_at",
         allowNull: false,
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       updatedAt: {
-        field: 'updated_at',
+        field: "updated_at",
         allowNull: false,
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
@@ -39,15 +39,15 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: 'Pictures_Item',
+      tableName: "Pictures_Item",
     }
   );
 
   PicturesItem.associate = (models) => {
     PicturesItem.belongsTo(models.Items, {
-      onDelete: 'CASCADE',
+      onDelete: "CASCADE",
       foreignKey: {
-        name: 'itemId',
+        name: "itemId",
         allowNull: false,
       },
     });
