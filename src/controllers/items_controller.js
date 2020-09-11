@@ -1,5 +1,7 @@
 const { Items, PicturesItem } = require("../models");
 
+const NotFoundError = require("../helpers/errors/not_found_error");
+
 const itemsController = {
   getItems: async () => {
     const items = await Items.findAll({
@@ -48,6 +50,13 @@ const itemsController = {
         },
       ],
     });
+
+    if (item == null) {
+      throw new NotFoundError(
+        "Not found item",
+        "La ressource demandée n'existe pas"
+      );
+    }
 
     return item;
   },
