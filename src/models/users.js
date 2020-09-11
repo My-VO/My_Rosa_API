@@ -1,9 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
   const Users = sequelize.define(
-    'Users',
+    "Users",
     {
       userId: {
-        field: 'user_id',
+        field: "user_id",
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       firstName: {
-        field: 'first_name',
+        field: "first_name",
         allowNull: false,
         type: DataTypes.STRING,
         validate: {
@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       lastName: {
-        field: 'last_name',
+        field: "last_name",
         allowNull: false,
         type: DataTypes.STRING,
         validate: {
@@ -44,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       createdAt: {
-        field: 'created_at',
+        field: "created_at",
         allowNull: false,
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
@@ -54,7 +54,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       updatedAt: {
-        field: 'updated_at',
+        field: "updated_at",
         allowNull: false,
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
@@ -65,14 +65,32 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: 'Users',
+      tableName: "Users",
     }
   );
 
   Users.associate = (models) => {
-    Users.hasMany(models.ContactInfo);
-    Users.hasMany(models.Comments);
-    Users.hasMany(models.Orders);
+    Users.hasMany(models.ContactInfo, {
+      onDelete: "CASCADE",
+      foreignKey: {
+        name: "userId",
+        allowNull: false,
+      },
+    });
+    Users.hasMany(models.Comments, {
+      onDelete: "CASCADE",
+      foreignKey: {
+        name: "userId",
+        allowNull: false,
+      },
+    });
+    Users.hasMany(models.Orders, {
+      onDelete: "CASCADE",
+      foreignKey: {
+        name: "userId",
+        allowNull: false,
+      },
+    });
   };
 
   return Users;

@@ -1,29 +1,35 @@
 module.exports = (sequelize, DataTypes) => {
   const ContactInfo = sequelize.define(
-    'ContactInfo',
+    "ContactInfo",
     {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER,
+      },
       userId: {
-        field: 'user_id',
+        field: "user_id",
         allowNull: false,
         type: DataTypes.INTEGER,
       },
       deliveryAddress: {
-        field: 'delivery_address',
+        field: "delivery_address",
         allowNull: false,
         type: DataTypes.TEXT,
       },
       billAddress: {
-        field: 'bill_address',
+        field: "bill_address",
         allowNull: false,
         type: DataTypes.TEXT,
       },
       phoneNumber: {
-        field: 'phone_number',
+        field: "phone_number",
         allowNull: false,
         type: DataTypes.INTEGER,
       },
       createdAt: {
-        field: 'created_at',
+        field: "created_at",
         allowNull: false,
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
@@ -33,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       updatedAt: {
-        field: 'updated_at',
+        field: "updated_at",
         allowNull: false,
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
@@ -44,18 +50,12 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: 'Contact_Info',
+      tableName: "Contact_Info",
     }
   );
 
   ContactInfo.associate = (models) => {
-    ContactInfo.belongsTo(models.Users, {
-      onDelete: 'CASCADE',
-      foreignKey: {
-        name: 'userId',
-        allowNull: false,
-      },
-    });
+    ContactInfo.belongsTo(models.Users);
   };
 
   return ContactInfo;

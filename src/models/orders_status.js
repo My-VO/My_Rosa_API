@@ -1,19 +1,25 @@
 module.exports = (sequelize, DataTypes) => {
   const OrdersStatus = sequelize.define(
-    'OrdersStatus',
+    "OrdersStatus",
     {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER,
+      },
       orderId: {
-        field: 'order_id',
+        field: "order_id",
         allowNull: false,
         type: DataTypes.INTEGER,
       },
       statusId: {
-        field: 'status_id',
+        field: "status_id",
         allowNull: false,
         type: DataTypes.INTEGER,
       },
       statusDate: {
-        field: 'status_date',
+        field: "status_date",
         allowNull: false,
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
@@ -24,24 +30,13 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: 'Orders_Status',
+      tableName: "Orders_Status",
     }
   );
 
   OrdersStatus.associate = (models) => {
-    OrdersStatus.belongsTo(models.Orders, {
-      onDelete: 'CASCADE',
-      foreignKey: {
-        name: 'orderId',
-      },
-    });
-    OrdersStatus.belongsTo(models.Status, {
-      onDelete: 'CASCADE',
-      foreignKey: {
-        name: 'statusId',
-        allowNull: false,
-      },
-    });
+    OrdersStatus.belongsTo(models.Orders);
+    OrdersStatus.belongsTo(models.Status);
   };
 
   return OrdersStatus;

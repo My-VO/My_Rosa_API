@@ -1,9 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
   const Status = sequelize.define(
-    'Status',
+    "Status",
     {
       statusId: {
-        field: 'status_id',
+        field: "status_id",
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
       },
       createdAt: {
-        field: 'created_at',
+        field: "created_at",
         allowNull: false,
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       updatedAt: {
-        field: 'updated_at',
+        field: "updated_at",
         allowNull: false,
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
@@ -34,12 +34,18 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: 'Status',
+      tableName: "Status",
     }
   );
 
   Status.associate = (models) => {
-    Status.hasMany(models.OrdersStatus);
+    Status.hasMany(models.OrdersStatus, {
+      onDelete: "CASCADE",
+      foreignKey: {
+        name: "statusId",
+        allowNull: false,
+      },
+    });
   };
 
   return Status;

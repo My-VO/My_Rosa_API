@@ -1,21 +1,21 @@
 module.exports = (sequelize, DataTypes) => {
   const Orders = sequelize.define(
-    'Orders',
+    "Orders",
     {
       orderId: {
-        field: 'order_id',
+        field: "order_id",
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
       userId: {
-        field: 'user_id',
+        field: "user_id",
         allowNull: false,
         type: DataTypes.INTEGER,
       },
       orderDate: {
-        field: 'order_date',
+        field: "order_date",
         allowNull: false,
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
@@ -26,20 +26,25 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: 'Orders',
+      tableName: "Orders",
     }
   );
 
   Orders.associate = (models) => {
-    Orders.belongsTo(models.Users, {
-      onDelete: 'CASCADE',
+    Orders.belongsTo(models.Users);
+    Orders.hasMany(models.OrderItems, {
+      onDelete: "CASCADE",
       foreignKey: {
-        name: 'userId',
+        name: "orderId",
         allowNull: false,
       },
     });
-    Orders.hasMany(models.OrderItems);
-    Orders.hasMany(models.OrdersStatus);
+    Orders.hasMany(models.OrdersStatus, {
+      onDelete: "CASCADE",
+      foreignKey: {
+        name: "orderId",
+      },
+    });
   };
 
   return Orders;
