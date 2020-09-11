@@ -10,7 +10,7 @@ const { notFoundHandler, errorLogger, errorHandler } = require("./middlewares");
 const server = express();
 
 server.use(helmet());
-server.use(logger("tiny"));
+server.use(logger("dev"));
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
 

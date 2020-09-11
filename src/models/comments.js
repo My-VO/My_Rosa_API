@@ -1,9 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
   const Comments = sequelize.define(
-    'Comments',
+    "Comments",
     {
       commentId: {
-        field: 'comment_id',
+        field: "comment_id",
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -13,12 +13,12 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       userId: {
-        field: 'user_id',
+        field: "user_id",
         allowNull: false,
         type: DataTypes.INTEGER,
       },
       itemId: {
-        field: 'item_id',
+        field: "item_id",
         allowNull: false,
         type: DataTypes.INTEGER,
       },
@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
       },
       createdAt: {
-        field: 'create_at',
+        field: "create_at",
         allowNull: false,
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       updatedAt: {
-        field: 'updated_at',
+        field: "updated_at",
         allowNull: false,
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
@@ -50,25 +50,13 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: 'Comments',
+      tableName: "Comments",
     }
   );
 
   Comments.associate = (models) => {
-    Comments.belongsTo(models.Users, {
-      onDelete: 'CASCADE',
-      foreignKey: {
-        name: 'userId',
-        allowNull: false,
-      },
-    });
-    Comments.belongsTo(models.Items, {
-      onDelete: 'CASCADE',
-      foreignKey: {
-        name: 'itemId',
-        allowNull: false,
-      },
-    });
+    Comments.belongsTo(models.Users);
+    Comments.belongsTo(models.Items);
   };
 
   return Comments;

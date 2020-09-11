@@ -1,9 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
   const Items = sequelize.define(
-    'Items',
+    "Items",
     {
       itemId: {
-        field: 'item_id',
+        field: "item_id",
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -14,22 +14,22 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
       },
       pricePot: {
-        field: 'price_pot',
+        field: "price_pot",
         allowNull: false,
         type: DataTypes.BIGINT,
       },
       stockQuantityPot: {
-        field: 'stock_quantity_pot',
+        field: "stock_quantity_pot",
         allowNull: false,
         type: DataTypes.INTEGER,
       },
       priceRoot: {
-        field: 'price_root',
+        field: "price_root",
         allowNull: false,
         type: DataTypes.BIGINT,
       },
       stockQuantityRoot: {
-        field: 'stock_quantity_root',
+        field: "stock_quantity_root",
         allowNull: false,
         type: DataTypes.INTEGER,
       },
@@ -49,15 +49,15 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
       },
       plantationCare: {
-        field: 'plantation_care',
+        field: "plantation_care",
         type: DataTypes.TEXT,
       },
       idealFor: {
-        field: 'ideal_for',
+        field: "ideal_for",
         type: DataTypes.TEXT,
       },
       createdAt: {
-        field: 'create_at',
+        field: "create_at",
         allowNull: false,
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
@@ -67,7 +67,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       updatedAt: {
-        field: 'updated_at',
+        field: "updated_at",
         allowNull: false,
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
@@ -78,13 +78,31 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: 'Items',
+      tableName: "Items",
     }
   );
   Items.associate = (models) => {
-    Items.hasMany(models.Comments);
-    Items.hasMany(models.PicturesItem);
-    Items.hasMany(models.OrderItems);
+    Items.hasMany(models.Comments, {
+      onDelete: "CASCADE",
+      foreignKey: {
+        name: "itemId",
+        allowNull: false,
+      },
+    });
+    Items.hasMany(models.PicturesItem, {
+      onDelete: "CASCADE",
+      foreignKey: {
+        name: "itemId",
+        allowNull: false,
+      },
+    });
+    Items.hasMany(models.OrderItems, {
+      onDelete: "CASCADE",
+      foreignKey: {
+        name: "itemId",
+        allowNull: false,
+      },
+    });
   };
 
   return Items;

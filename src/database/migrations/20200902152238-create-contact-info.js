@@ -1,15 +1,21 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Contact_Info', {
+    await queryInterface.createTable("Contact_Info", {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
       user_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        onDelete: 'CASCADE',
+        onDelete: "CASCADE",
         references: {
           model: {
-            tableName: 'Users',
+            tableName: "Users",
           },
-          key: 'user_id',
+          key: "user_id",
         },
       },
       delivery_address: {
@@ -34,6 +40,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Contact_Info');
+    await queryInterface.dropTable("Contact_Info");
   },
 };

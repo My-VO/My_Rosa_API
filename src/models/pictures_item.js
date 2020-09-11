@@ -2,16 +2,16 @@ module.exports = (sequelize, DataTypes) => {
   const PicturesItem = sequelize.define(
     "PicturesItem",
     {
-      item_id: {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER,
+      },
+      itemId: {
         field: "item_id",
         allowNull: false,
         type: DataTypes.INTEGER,
-        // references: {
-        //   model: {
-        //     tableName: 'Items',
-        //   },
-        //   key: 'item_id',
-        // },
       },
       picture: {
         allowNull: false,
@@ -44,13 +44,7 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   PicturesItem.associate = (models) => {
-    PicturesItem.belongsTo(models.Items, {
-      onDelete: "CASCADE",
-      foreignKey: {
-        name: "itemId",
-        allowNull: false,
-      },
-    });
+    PicturesItem.belongsTo(models.Items);
   };
 
   return PicturesItem;

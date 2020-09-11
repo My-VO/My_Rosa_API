@@ -1,36 +1,42 @@
 module.exports = (sequelize, DataTypes) => {
   const OrderItems = sequelize.define(
-    'OrderItems',
+    "OrderItems",
     {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER,
+      },
       orderId: {
-        field: 'order_id',
+        field: "order_id",
         allowNull: false,
         type: DataTypes.INTEGER,
         references: {
           model: {
-            tableName: 'Orders',
+            tableName: "Orders",
           },
-          key: 'orderId',
+          key: "orderId",
         },
       },
       itemId: {
-        field: 'item_id',
+        field: "item_id",
         allowNull: false,
         type: DataTypes.INTEGER,
         references: {
           model: {
-            tableName: 'Items',
+            tableName: "Items",
           },
-          key: 'itemId',
+          key: "itemId",
         },
       },
       quantityOrder: {
         allowNull: false,
-        field: 'quantity_order',
+        field: "quantity_order",
         type: DataTypes.INTEGER,
       },
       createdAt: {
-        field: 'created_at',
+        field: "created_at",
         allowNull: false,
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
@@ -40,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       updatedAt: {
-        field: 'updated_at',
+        field: "updated_at",
         allowNull: false,
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
@@ -51,25 +57,13 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: 'Orders_Items',
+      tableName: "Orders_Items",
     }
   );
 
   OrderItems.associate = (models) => {
-    OrderItems.belongsTo(models.Items, {
-      onDelete: 'CASCADE',
-      foreignKey: {
-        name: 'itemId',
-        allowNull: false,
-      },
-    });
-    OrderItems.belongsTo(models.Orders, {
-      onDelete: 'CASCADE',
-      foreignKey: {
-        name: 'orderId',
-        allowNull: false,
-      },
-    });
+    OrderItems.belongsTo(models.Items);
+    OrderItems.belongsTo(models.Orders);
   };
 
   return OrderItems;
