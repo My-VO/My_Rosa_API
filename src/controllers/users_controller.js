@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 
 const { Users } = require("../models");
-const { userTDO, authenticateDTO } = require("../dto");
+const { userTDO } = require("../dto");
 
 const ConflictError = require("../helpers/errors/conflict_error");
 const UnauthorrizedError = require("../helpers/errors/unauthorized_error");
@@ -57,9 +57,7 @@ const usersController = {
       );
     }
 
-    const findUserByEmailDTO = await authenticateDTO.convert2DTO(
-      findUserByEmail
-    );
+    const findUserByEmailDTO = await userTDO.convert2DTO(findUserByEmail);
 
     return findUserByEmailDTO;
   },

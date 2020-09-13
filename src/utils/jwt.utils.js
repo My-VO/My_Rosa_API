@@ -1,11 +1,12 @@
-require('dotenv').config();
+require("dotenv").config();
 
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
 const accessTokenSecret = process.env.JWT_SIGN_SECRET;
 
 module.exports = {
-  genToken: (userData) => {
+  generateToken: (userData) => {
+    console.log("userData : ", userData);
     return jwt.sign(
       {
         userId: userData.id,
@@ -21,7 +22,7 @@ module.exports = {
     const authHeader = req.headers.authorization;
 
     if (authHeader) {
-      const token = authHeader.split(' ')[1];
+      const token = authHeader.split(" ")[1];
 
       jwt.verify(token, accessTokenSecret, (err, user) => {
         if (err) {
@@ -35,7 +36,7 @@ module.exports = {
       });
     } else {
       res.status(401).json({
-        error: 'Vous devez être connecté pour accéder à cette ressource',
+        error: "Vous devez être connecté pour accéder à cette ressource",
       });
     }
   },

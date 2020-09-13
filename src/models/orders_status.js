@@ -18,8 +18,18 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.INTEGER,
       },
-      statusDate: {
-        field: "status_date",
+      createdAt: {
+        field: "created_at",
+        allowNull: false,
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
+        validate: {
+          isDate: true,
+          notNull: true,
+        },
+      },
+      updatedAt: {
+        field: "updated_at",
         allowNull: false,
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
@@ -35,8 +45,20 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   OrdersStatus.associate = (models) => {
-    OrdersStatus.belongsTo(models.Orders);
-    OrdersStatus.belongsTo(models.Status);
+    OrdersStatus.belongsTo(models.Orders, {
+      onDelete: "CASCADE",
+      foreignKey: {
+        name: "orderId",
+        allowNull: false,
+      },
+    });
+    OrdersStatus.belongsTo(models.Status, {
+      onDelete: "CASCADE",
+      foreignKey: {
+        name: "statusId",
+        allowNull: false,
+      },
+    });
   };
 
   return OrdersStatus;

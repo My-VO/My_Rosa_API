@@ -55,8 +55,20 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   Comments.associate = (models) => {
-    Comments.belongsTo(models.Users);
-    Comments.belongsTo(models.Items);
+    Comments.belongsTo(models.Users, {
+      onDelete: "CASCADE",
+      foreignKey: {
+        name: "userId",
+        allowNull: false,
+      },
+    });
+    Comments.belongsTo(models.Items, {
+      onDelete: "CASCADE",
+      foreignKey: {
+        name: "itemId",
+        allowNull: false,
+      },
+    });
   };
 
   return Comments;

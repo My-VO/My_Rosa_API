@@ -10,6 +10,14 @@
     "lint:fix": "eslint --fix .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [
+    "nodejs",
+    "express",
+    "sequelize",
+    "rest",
+    "api",
+    "postgresql"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/My-VO/My_Rosa_Back.git"

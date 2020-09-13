@@ -14,8 +14,18 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.INTEGER,
       },
-      orderDate: {
-        field: "order_date",
+      createdAt: {
+        field: "created_at",
+        allowNull: false,
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
+        validate: {
+          isDate: true,
+          notNull: true,
+        },
+      },
+      updatedAt: {
+        field: "updated_at",
         allowNull: false,
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
@@ -31,7 +41,13 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   Orders.associate = (models) => {
-    Orders.belongsTo(models.Users);
+    Orders.belongsTo(models.Users, {
+      onDelete: "CASCADE",
+      foreignKey: {
+        name: "userId",
+        allowNull: false,
+      },
+    });
     Orders.hasMany(models.OrderItems, {
       onDelete: "CASCADE",
       foreignKey: {

@@ -44,7 +44,13 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   PicturesItem.associate = (models) => {
-    PicturesItem.belongsTo(models.Items);
+    PicturesItem.belongsTo(models.Items, {
+      onDelete: "CASCADE",
+      foreignKey: {
+        name: "itemId",
+        allowNull: false,
+      },
+    });
   };
 
   return PicturesItem;
