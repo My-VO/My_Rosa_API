@@ -7,6 +7,7 @@ const {
   Items,
   PicturesItem,
 } = require("../models");
+const { request } = require("express");
 
 const confirmedItems = async (orderItems, orderId) => {
   const { items } = orderItems;
@@ -26,8 +27,6 @@ const confirmedItems = async (orderItems, orderId) => {
 
 const ordersController = {
   addOrder: async (data, userId) => {
-    console.log("data : ", data);
-
     const newOrder = await Orders.create({
       userId,
     });
@@ -72,6 +71,49 @@ const ordersController = {
     });
 
     return confirmedOrder;
+  },
+
+  // eslint-disable-next-line no-shadow
+  getOrders: async (request) => {
+    const { userId } = request.user;
+
+    const orderList = await Orders.findAll({
+      attributes: ["orderId", "userId", "createdAt", "updatedAt"],
+      where: {
+        userId,
+      },
+      include: [
+        {
+          model: Users,
+          attributes: ["firstName", "lastName"],
+        },
+        {
+          model: OrdersStatus,
+          attibutes: ["statusId"],
+          include: [{ model: Status, attributes: ["description"] }],
+        },
+        {
+          model: OrderItems,
+          attributes: ["itemId", "quantityOrder"],
+          include: [
+            {
+              model: Items,
+              attributes: ["name", "variety", "pricePot", "priceRoot"],
+              include: [
+                {
+                  model: PicturesItem,
+                  attributes: ["picture"],
+                },
+              ],
+            },
+          ],
+          order: [["itemId", "ASC"]],
+        },
+      ],
+      order: [["createdAt", "DESC"]],
+    });
+
+    return orderList;
   },
 };
 
