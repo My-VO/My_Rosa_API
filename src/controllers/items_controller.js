@@ -26,6 +26,31 @@ const itemsController = {
     return items;
   },
 
+  getItemsByColor: async (color) => {
+    return Items.findAll({
+      attributes: [
+        "itemId",
+        "name",
+        "pricePot",
+        "stockQuantityPot",
+        "variety",
+        "perfume",
+        "size",
+        "color",
+      ],
+      where: {
+        color,
+      },
+      include: [
+        {
+          model: PicturesItem,
+          attributes: ["picture"],
+        },
+      ],
+      order: [["itemId", "ASC"]],
+    });
+  },
+
   getItem: async (itemId) => {
     const item = await Items.findByPk(itemId, {
       attributes: [

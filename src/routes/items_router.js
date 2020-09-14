@@ -7,10 +7,21 @@ const itemsController = require("../controllers/items_controller");
 const itemsRouter = express.Router();
 
 itemsRouter.get("/items", async (request, reponse) => {
-  const items = await itemsController.getItems(request);
+  if (Object.keys(request.query).length !== 0) {
+    if (request.query.color !== undefined) {
+      const itemsFound = await itemsController.getItemsByColor(
+        request.query.color
+      );
 
-  reponse.status(OK);
-  reponse.json(items);
+      reponse.status(OK);
+      reponse.json(itemsFound);
+    }
+  } else {
+    const items = await itemsController.getItems(request);
+
+    reponse.status(OK);
+    reponse.json(items);
+  }
 });
 
 itemsRouter.get("/items/:itemId", async (request, reponse) => {
