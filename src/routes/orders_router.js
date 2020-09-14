@@ -3,7 +3,7 @@ const express = require("express");
 const authMid = require("../utils/jwt.utils");
 
 const ordersController = require("../controllers/orders_controller");
-const { CREATED } = require("../helpers/status_codes");
+const { CREATED, OK } = require("../helpers/status_codes");
 const BadRequestError = require("../helpers/errors/bad_request_error");
 
 const ordersRouter = express.Router();
@@ -37,6 +37,17 @@ ordersRouter.post(
 
     reponse.status(CREATED);
     reponse.json(newOrder);
+  }
+);
+
+ordersRouter.get(
+  "/orders",
+  authMid.authenticateJWT,
+  async (request, reponse) => {
+    const ordersFound = await ordersController.getOrders(request);
+
+    reponse.status(OK);
+    reponse.json(ordersFound);
   }
 );
 
