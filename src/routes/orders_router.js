@@ -4,6 +4,7 @@ const authMid = require("../utils/jwt.utils");
 
 const ordersController = require("../controllers/orders_controller");
 const { CREATED } = require("../helpers/status_codes");
+const BadRequestError = require("../helpers/errors/bad_request_error");
 
 const ordersRouter = express.Router();
 
@@ -13,6 +14,24 @@ ordersRouter.post(
   async (request, reponse) => {
     const { userId } = request.user;
     const data = request.body;
+
+    for (let i = 0; i < data.items.length; i++) {
+      const { itemId, quantityOrder } = data.items[i];
+
+      if (itemId == null || typeof itemId !== "number") {
+        throw new BadRequestError(
+          "Requête incorrecte",
+          "Le champ item_id n'est pas renseigné"
+        );
+      }
+
+      if (quantityOrder == null || typeof itemId !== "number") {
+        throw new BadRequestError(
+          "Requête incorrecte",
+          "Le champ quantity_order n'est pas renseigné"
+        );
+      }
+    }
 
     const newOrder = await ordersController.addOrder(data, userId);
 
