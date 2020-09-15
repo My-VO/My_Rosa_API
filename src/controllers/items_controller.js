@@ -51,6 +51,59 @@ const itemsController = {
     });
   },
 
+  getItemsByVariety: async (variety) => {
+    return Items.findAll({
+      attributes: [
+        "itemId",
+        "name",
+        "pricePot",
+        "stockQuantityPot",
+        "variety",
+        "perfume",
+        "size",
+        "color",
+      ],
+      where: {
+        variety,
+      },
+      include: [
+        {
+          model: PicturesItem,
+          attributes: ["picture"],
+        },
+      ],
+      order: [["itemId", "ASC"]],
+    });
+  },
+
+  getItemsByColorNVariety: async (request) => {
+    const { color, variety } = request;
+
+    return Items.findAll({
+      attributes: [
+        "itemId",
+        "name",
+        "pricePot",
+        "stockQuantityPot",
+        "variety",
+        "perfume",
+        "size",
+        "color",
+      ],
+      where: {
+        color,
+        variety,
+      },
+      include: [
+        {
+          model: PicturesItem,
+          attributes: ["picture"],
+        },
+      ],
+      order: [["itemId", "ASC"]],
+    });
+  },
+
   getItem: async (itemId) => {
     const item = await Items.findByPk(itemId, {
       attributes: [

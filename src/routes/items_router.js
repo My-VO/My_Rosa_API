@@ -8,9 +8,32 @@ const itemsRouter = express.Router();
 
 itemsRouter.get("/items", async (request, reponse) => {
   if (Object.keys(request.query).length !== 0) {
-    if (request.query.color !== undefined) {
-      const itemsFound = await itemsController.getItemsByColor(
-        request.query.color
+    if (Object.keys(request.query).length === 1) {
+      if (request.query.color !== undefined) {
+        const itemsFound = await itemsController.getItemsByColor(
+          request.query.color
+        );
+
+        reponse.status(OK);
+        reponse.json(itemsFound);
+      }
+
+      if (request.query.variety !== undefined) {
+        const itemsFound = await itemsController.getItemsByVariety(
+          request.query.variety
+        );
+
+        reponse.status(OK);
+        reponse.json(itemsFound);
+      }
+    }
+
+    if (
+      request.query.color !== undefined &&
+      request.query.variety !== undefined
+    ) {
+      const itemsFound = await itemsController.getItemsByColorNVariety(
+        request.query
       );
 
       reponse.status(OK);
