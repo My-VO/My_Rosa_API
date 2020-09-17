@@ -6,8 +6,11 @@ const usersRouter = require("./users_router");
 const itemsRouter = require("./items_router");
 const ordersRouter = require("./orders_router");
 
-mainRouter.get("/", (req, res) => {
-  res.status(200).json({ message: "Hello World!" });
+const { OK } = require("../helpers/status_codes");
+
+mainRouter.get("/", (request, reponse) => {
+  reponse.status(OK);
+  reponse.json({ message: "Hello World!" });
 });
 mainRouter.use(usersRouter);
 mainRouter.use(itemsRouter);

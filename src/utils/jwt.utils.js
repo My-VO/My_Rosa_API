@@ -2,10 +2,14 @@ require("dotenv").config();
 
 const jwt = require("jsonwebtoken");
 
+const UnauthorrizedError = require("../helpers/errors/unauthorized_error");
+const ForbiddenError = require("../helpers/errors/forbidden_error");
+
 const accessTokenSecret = process.env.JWT_SIGN_SECRET;
 
 module.exports = {
   generateToken: (userData) => {
+    // eslint-disable-next-line no-console
     console.log("userData : ", userData);
     return jwt.sign(
       {
@@ -18,26 +22,27 @@ module.exports = {
     );
   },
 
-  authenticateJWT: (req, res, next) => {
-    const authHeader = req.headers.authorization;
+  authenticateJWT: (request, reponse, next) => {
+    const authHeader = request.headers.authorization;
 
     if (authHeader) {
       const token = authHeader.split(" ")[1];
 
-      jwt.verify(token, accessTokenSecret, (err, user) => {
-        if (err) {
-          console.log(err);
-          return res.sendStatus(403);
+      // eslint-disable-next-line consistent-return
+      jwt.verify(token, accessTokenSecret, (error, user) => {
+        if (error) {
+          throw new ForbiddenError();
         }
 
-        req.user = user;
+        request.user = user;
 
         next();
       });
     } else {
-      res.status(401).json({
-        error: "Vous devez être connecté pour accéder à cette ressource",
-      });
+      throw new UnauthorrizedError(
+        "Accès refusé",
+        "Vous devez être connecté pour accéder à cette ressource"
+      );
     }
   },
 };
