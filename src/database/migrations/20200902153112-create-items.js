@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Items', {
+    await queryInterface.createTable("Items", {
       item_id: {
         allowNull: false,
         autoIncrement: true,
@@ -29,8 +29,8 @@ module.exports = {
       perfume: {
         type: Sequelize.TEXT,
       },
-      size: {
-        type: Sequelize.TEXT,
+      size_cm: {
+        type: Sequelize.INTEGER,
       },
       color: {
         type: Sequelize.TEXT,
@@ -57,6 +57,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Items');
+    await queryInterface.dropTable("Items");
   },
 };

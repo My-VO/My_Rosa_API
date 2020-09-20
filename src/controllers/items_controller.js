@@ -1,3 +1,5 @@
+const { Op } = require("sequelize");
+
 const { Items, PicturesItem } = require("../models");
 
 const NotFoundError = require("../helpers/errors/not_found_error");
@@ -26,58 +28,13 @@ const itemsController = {
     return items;
   },
 
-  getItemsByColor: async (color) => {
-    return Items.findAll({
-      attributes: [
-        "itemId",
-        "name",
-        "pricePot",
-        "stockQuantityPot",
-        "variety",
-        "perfume",
-        "size",
-        "color",
-      ],
-      where: {
-        color,
-      },
-      include: [
-        {
-          model: PicturesItem,
-          attributes: ["picture"],
-        },
-      ],
-      order: [["itemId", "ASC"]],
-    });
-  },
+  getItemsByElement: async (request) => {
+    const { color, variety, perfume, size } = request.query;
+    let sizeSplit;
 
-  getItemsByVariety: async (variety) => {
-    return Items.findAll({
-      attributes: [
-        "itemId",
-        "name",
-        "pricePot",
-        "stockQuantityPot",
-        "variety",
-        "perfume",
-        "size",
-        "color",
-      ],
-      where: {
-        variety,
-      },
-      include: [
-        {
-          model: PicturesItem,
-          attributes: ["picture"],
-        },
-      ],
-      order: [["itemId", "ASC"]],
-    });
-  },
-
-  getItemsByColorNVariety: async (request) => {
-    const { color, variety } = request;
+    if (size) {
+      sizeSplit = size.split("_");
+    }
 
     return Items.findAll({
       attributes: [
@@ -91,8 +48,16 @@ const itemsController = {
         "color",
       ],
       where: {
-        color,
-        variety,
+        [Op.and]: [
+          color ? { color } : {},
+          variety ? { variety } : {},
+          perfume ? { perfume } : {},
+          size
+            ? {
+                size: { [Op.between]: [sizeSplit[0], sizeSplit[1]] },
+              }
+            : {},
+        ],
       },
       include: [
         {

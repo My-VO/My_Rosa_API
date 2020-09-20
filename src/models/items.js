@@ -40,7 +40,8 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
       },
       size: {
-        type: DataTypes.TEXT,
+        field: "size_cm",
+        type: DataTypes.INTEGER,
       },
       color: {
         type: DataTypes.TEXT,
