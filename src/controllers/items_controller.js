@@ -82,6 +82,7 @@ const itemsController = {
         "perfume",
         "size",
         "color",
+        "flowering",
         "description",
         "plantationCare",
         "idealFor",

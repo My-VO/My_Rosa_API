@@ -1,4 +1,5 @@
 "use strict";
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable("Items", {
@@ -33,6 +34,9 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       color: {
+        type: Sequelize.TEXT,
+      },
+      flowering: {
         type: Sequelize.TEXT,
       },
       description: {

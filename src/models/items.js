@@ -46,6 +46,9 @@ module.exports = (sequelize, DataTypes) => {
       color: {
         type: DataTypes.TEXT,
       },
+      flowering: {
+        type: DataTypes.TEXT,
+      },
       description: {
         type: DataTypes.TEXT,
       },
