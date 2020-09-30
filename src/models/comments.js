@@ -17,11 +17,6 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.INTEGER,
       },
-      itemId: {
-        field: "item_id",
-        allowNull: false,
-        type: DataTypes.INTEGER,
-      },
       itemType: {
         field: "item_type",
         allowNull: false,
@@ -74,13 +69,6 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
     });
-    // Comments.belongsTo(models.Items, {
-    //   onDelete: "CASCADE",
-    //   foreignKey: {
-    //     name: "itemType",
-    //     allowNull: false,
-    //   },
-    // });
   };
 
   return Comments;

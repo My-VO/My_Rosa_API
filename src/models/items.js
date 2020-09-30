@@ -9,10 +9,8 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
-      itemType: {
-        field: "item_type",
+      type: {
         allowNull: false,
-        primaryKey: true,
         type: DataTypes.TEXT,
       },
       name: {
@@ -20,7 +18,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
       },
       price: {
-        field: "price",
         allowNull: false,
         type: DataTypes.BIGINT,
       },
@@ -89,28 +86,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
     });
-    // Items.hasMany(models.Comments, {
-    //   onDelete: "CASCADE",
-    //   foreignKey: {
-    //     name: "itemType",
-    //     allowNull: false,
-    //   },
-    // });
     Items.hasMany(models.PicturesItem, {
-      onDelete: "CASCADE",
-      foreignKey: {
-        name: "itemId",
-        allowNull: false,
-      },
-    });
-    Items.hasMany(models.PicturesItem, {
-      onDelete: "CASCADE",
-      foreignKey: {
-        name: "itemType",
-        allowNull: false,
-      },
-    });
-    Items.hasMany(models.OrderItems, {
       onDelete: "CASCADE",
       foreignKey: {
         name: "itemId",
@@ -120,7 +96,7 @@ module.exports = (sequelize, DataTypes) => {
     Items.hasMany(models.OrderItems, {
       onDelete: "CASCADE",
       foreignKey: {
-        name: "itemType",
+        name: "itemId",
         allowNull: false,
       },
     });

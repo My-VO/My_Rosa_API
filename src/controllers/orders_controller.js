@@ -1,3 +1,4 @@
+const { request } = require("express");
 const {
   Users,
   Orders,
@@ -7,7 +8,6 @@ const {
   Items,
   PicturesItem,
 } = require("../models");
-const { request } = require("express");
 
 const confirmedItems = async (orderItems, orderId) => {
   const { items } = orderItems;
@@ -56,7 +56,7 @@ const ordersController = {
           include: [
             {
               model: Items,
-              attributes: ["name", "variety", "pricePot", "priceRoot"],
+              attributes: ["name", "variety", "price", "type"],
               include: [
                 {
                   model: PicturesItem,
@@ -98,7 +98,7 @@ const ordersController = {
           include: [
             {
               model: Items,
-              attributes: ["name", "variety", "pricePot", "priceRoot"],
+              attributes: ["name", "variety", "price", "type"],
               include: [
                 {
                   model: PicturesItem,

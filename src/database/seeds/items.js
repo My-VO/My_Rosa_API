@@ -5,7 +5,7 @@ const now = moment().utc().toDate();
 module.exports = [
   {
     item_id: 1,
-    item_type: "Pot",
+    type: "Pot",
     name: "Pierre de Ronsard",
     price: 22.5,
     stock_quantity: 10,
@@ -25,12 +25,10 @@ module.exports = [
   },
   {
     item_id: 2,
-    item_type: "Pot",
+    type: "Pot",
     name: "EUSTACIA VYE",
-    price_pot: 32.5,
-    stock_quantity_pot: 40,
-    price_root: 25.5,
-    stock_quantity_root: 30,
+    price: 32.5,
+    stock_quantity: 40,
     variety: "Rosier anglais",
     perfume: "Très parfumée",
     size_cm: 125,
@@ -47,7 +45,7 @@ module.exports = [
   },
   {
     item_id: 3,
-    item_type: "Pot",
+    type: "Pot",
     name: "CLAIRE AUSTIN",
     price: 28.95,
     stock_quantity: 27,
@@ -67,7 +65,7 @@ module.exports = [
   },
   {
     item_id: 4,
-    item_type: "Pot",
+    type: "Pot",
     name: "ROALD DAHL",
     price: 28.95,
     stock_quantity: 11,
@@ -87,7 +85,7 @@ module.exports = [
   },
   {
     item_id: 5,
-    item_type: "Pot",
+    type: "Pot",
     name: "CHARLES DARWIN",
     price: 28.95,
     stock_quantity: 32,
@@ -105,8 +103,8 @@ module.exports = [
     updated_at: now,
   },
   {
-    item_id: 1,
-    item_type: "Root",
+    item_id: 6,
+    type: "Root",
     name: "Pierre de Ronsard",
     price: 16.5,
     stock_quantity: 50,
@@ -125,8 +123,8 @@ module.exports = [
     updated_at: now,
   },
   {
-    item_id: 2,
-    item_type: "Root",
+    item_id: 7,
+    type: "Root",
     name: "EUSTACIA VYE",
     price: 25.5,
     stock_quantity: 30,
@@ -145,8 +143,8 @@ module.exports = [
     updated_at: now,
   },
   {
-    item_id: 3,
-    item_type: "Root",
+    item_id: 8,
+    type: "Root",
     name: "CLAIRE AUSTIN",
     price: 21.95,
     stock_quantity: 60,
@@ -165,8 +163,8 @@ module.exports = [
     updated_at: now,
   },
   {
-    item_id: 4,
-    item_type: "Root",
+    item_id: 9,
+    type: "Root",
     name: "ROALD DAHL",
     price: 21.95,
     stock_quantity: 30,
@@ -185,8 +183,8 @@ module.exports = [
     updated_at: now,
   },
   {
-    item_id: 5,
-    item_type: "Root",
+    item_id: 10,
+    type: "Root",
     name: "CHARLES DARWIN",
     price: 21.95,
     stock_quantity: 50,

@@ -30,16 +30,6 @@ module.exports = (sequelize, DataTypes) => {
           key: "itemId",
         },
       },
-      itemType: {
-        field: "item_type",
-        allowNull: false,
-        type: DataTypes.TEXT,
-        references: {
-          model: {
-            tableName: "Items",
-          },
-          key: "itemType",
-      },
       quantityOrder: {
         allowNull: false,
         field: "quantity_order",
@@ -76,13 +66,6 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: "CASCADE",
       foreignKey: {
         name: "itemId",
-        allowNull: false,
-      },
-    });
-    OrderItems.belongsTo(models.Items, {
-      onDelete: "CASCADE",
-      foreignKey: {
-        name: "itemType",
         allowNull: false,
       },
     });

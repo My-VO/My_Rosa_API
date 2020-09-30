@@ -29,17 +29,6 @@ module.exports = {
           key: "item_id",
         },
       },
-      item_type: {
-        allowNull: false,
-        type: Sequelize.TEXT,
-        onDelete: "CASCADE",
-        references: {
-          model: {
-            tableName: "Items",
-          },
-          key: "item_type",
-        },
-      },
       comment: {
         type: Sequelize.TEXT,
       },
