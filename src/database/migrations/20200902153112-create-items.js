@@ -9,19 +9,18 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
+      item_type: {
+        allowNull: false,
+        primaryKey: true,
+        type: Sequelize.TEXT,
+      },
       name: {
         type: Sequelize.TEXT,
       },
-      price_pot: {
+      price: {
         type: Sequelize.BIGINT,
       },
-      stock_quantity_pot: {
-        type: Sequelize.INTEGER,
-      },
-      price_root: {
-        type: Sequelize.BIGINT,
-      },
-      stock_quantity_root: {
+      stock_quantity: {
         type: Sequelize.INTEGER,
       },
       variety: {
@@ -59,7 +58,13 @@ module.exports = {
         defaultValue: Sequelize.NOW,
       },
     });
+    // .then(() => {
+    //   return queryInterface.sequelize.query(
+    //     'ALTER TABLE "Items" ADD CONSTRAINT "itemPk" PRIMARY KEY ("item_id", "item_type")'
+    //   );
+    // });
   },
+
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable("Items");
   },

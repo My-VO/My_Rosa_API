@@ -13,6 +13,11 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.INTEGER,
       },
+      itemType: {
+        field: "item_type",
+        allowNull: false,
+        type: DataTypes.TEXT,
+      },
       picture: {
         allowNull: false,
         type: DataTypes.TEXT,
@@ -48,6 +53,13 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: "CASCADE",
       foreignKey: {
         name: "itemId",
+        allowNull: false,
+      },
+    });
+    PicturesItem.belongsTo(models.Items, {
+      onDelete: "CASCADE",
+      foreignKey: {
+        name: "itemType",
         allowNull: false,
       },
     });

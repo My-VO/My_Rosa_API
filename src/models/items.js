@@ -9,27 +9,23 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
+      itemType: {
+        field: "item_type",
+        allowNull: false,
+        primaryKey: true,
+        type: DataTypes.TEXT,
+      },
       name: {
         allowNull: false,
         type: DataTypes.TEXT,
       },
-      pricePot: {
-        field: "price_pot",
+      price: {
+        field: "price",
         allowNull: false,
         type: DataTypes.BIGINT,
       },
-      stockQuantityPot: {
-        field: "stock_quantity_pot",
-        allowNull: false,
-        type: DataTypes.INTEGER,
-      },
-      priceRoot: {
-        field: "price_root",
-        allowNull: false,
-        type: DataTypes.BIGINT,
-      },
-      stockQuantityRoot: {
-        field: "stock_quantity_root",
+      stockQuantity: {
+        field: "stock_quantity",
         allowNull: false,
         type: DataTypes.INTEGER,
       },
@@ -93,10 +89,24 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
     });
+    // Items.hasMany(models.Comments, {
+    //   onDelete: "CASCADE",
+    //   foreignKey: {
+    //     name: "itemType",
+    //     allowNull: false,
+    //   },
+    // });
     Items.hasMany(models.PicturesItem, {
       onDelete: "CASCADE",
       foreignKey: {
         name: "itemId",
+        allowNull: false,
+      },
+    });
+    Items.hasMany(models.PicturesItem, {
+      onDelete: "CASCADE",
+      foreignKey: {
+        name: "itemType",
         allowNull: false,
       },
     });
@@ -107,7 +117,14 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
     });
+    Items.hasMany(models.OrderItems, {
+      onDelete: "CASCADE",
+      foreignKey: {
+        name: "itemType",
+        allowNull: false,
+      },
+    });
   };
-
+  Items.removeAttribute("id");
   return Items;
 };
