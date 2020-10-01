@@ -30,7 +30,6 @@ const usersController = {
     console.log("email : ", email);
 
     const newUser = await Users.create({
-      userId: "1",
       firstName,
       lastName,
       email,
