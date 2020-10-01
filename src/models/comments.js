@@ -8,19 +8,16 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER,
-        validate: {
-          notNull: true,
-        },
       },
       userId: {
         field: "user_id",
         allowNull: false,
         type: DataTypes.INTEGER,
       },
-      itemId: {
-        field: "item_id",
+      itemType: {
+        field: "item_type",
         allowNull: false,
-        type: DataTypes.INTEGER,
+        type: DataTypes.TEXT,
       },
       comment: {
         type: DataTypes.TEXT,
@@ -35,7 +32,6 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: DataTypes.NOW,
         validate: {
           isDate: true,
-          notNull: true,
         },
       },
       updatedAt: {
@@ -45,7 +41,6 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: DataTypes.NOW,
         validate: {
           isDate: true,
-          notNull: true,
         },
       },
     },

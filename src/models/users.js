@@ -8,40 +8,27 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER,
-        validate: {
-          notNull: true,
-        },
       },
       firstName: {
         field: "first_name",
         allowNull: false,
         type: DataTypes.STRING,
-        validate: {
-          notNull: true,
-        },
       },
       lastName: {
         field: "last_name",
         allowNull: false,
         type: DataTypes.STRING,
-        validate: {
-          notNull: true,
-        },
       },
       email: {
         allowNull: false,
         type: DataTypes.STRING,
         validate: {
-          notNull: true,
           isEmail: true,
         },
       },
       password: {
         allowNull: false,
         type: DataTypes.STRING,
-        validate: {
-          notNull: true,
-        },
       },
       createdAt: {
         field: "created_at",
@@ -50,7 +37,6 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: DataTypes.NOW,
         validate: {
           isDate: true,
-          notNull: true,
         },
       },
       updatedAt: {
@@ -60,7 +46,6 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: DataTypes.NOW,
         validate: {
           isDate: true,
-          notNull: true,
         },
       },
     },

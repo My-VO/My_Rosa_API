@@ -20,10 +20,10 @@ itemsRouter.get("/items", async (request, reponse) => {
   }
 });
 
-itemsRouter.get("/items/:itemId", async (request, reponse) => {
-  const { itemId } = request.params;
+itemsRouter.get("/items/:name", async (request, reponse) => {
+  const { name } = request.params;
 
-  const item = await itemsController.getItem(itemId);
+  const item = await itemsController.getItem(name);
 
   reponse.status(OK);
   reponse.json(item);

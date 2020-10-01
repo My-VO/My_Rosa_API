@@ -7,19 +7,17 @@ const {
   Items,
   PicturesItem,
 } = require("../models");
-const { request } = require("express");
 
 const confirmedItems = async (orderItems, orderId) => {
-  const { items } = orderItems;
-
   return Promise.all(
-    items.map(async (orderItem) => {
+    orderItems.map(async (orderItem) => {
       const { itemId, quantityOrder } = orderItem;
       const newItem = await OrderItems.create({
         orderId,
         itemId,
         quantityOrder,
       });
+
       return newItem.dataValues;
     })
   );
@@ -56,7 +54,7 @@ const ordersController = {
           include: [
             {
               model: Items,
-              attributes: ["name", "variety", "pricePot", "priceRoot"],
+              attributes: ["name", "variety", "price", "type"],
               include: [
                 {
                   model: PicturesItem,
@@ -98,7 +96,7 @@ const ordersController = {
           include: [
             {
               model: Items,
-              attributes: ["name", "variety", "pricePot", "priceRoot"],
+              attributes: ["name", "variety", "price", "type"],
               include: [
                 {
                   model: PicturesItem,

@@ -9,27 +9,20 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
+      type: {
+        allowNull: false,
+        type: DataTypes.TEXT,
+      },
       name: {
         allowNull: false,
         type: DataTypes.TEXT,
       },
-      pricePot: {
-        field: "price_pot",
+      price: {
         allowNull: false,
         type: DataTypes.BIGINT,
       },
-      stockQuantityPot: {
-        field: "stock_quantity_pot",
-        allowNull: false,
-        type: DataTypes.INTEGER,
-      },
-      priceRoot: {
-        field: "price_root",
-        allowNull: false,
-        type: DataTypes.BIGINT,
-      },
-      stockQuantityRoot: {
-        field: "stock_quantity_root",
+      stockQuantity: {
+        field: "stock_quantity",
         allowNull: false,
         type: DataTypes.INTEGER,
       },
@@ -67,7 +60,6 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: DataTypes.NOW,
         validate: {
           isDate: true,
-          notNull: true,
         },
       },
       updatedAt: {
@@ -77,7 +69,6 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: DataTypes.NOW,
         validate: {
           isDate: true,
-          notNull: true,
         },
       },
     },
@@ -108,6 +99,6 @@ module.exports = (sequelize, DataTypes) => {
       },
     });
   };
-
+  Items.removeAttribute("id");
   return Items;
 };

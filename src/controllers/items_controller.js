@@ -9,14 +9,16 @@ const itemsController = {
     const items = await Items.findAll({
       attributes: [
         "itemId",
+        "type",
         "name",
-        "pricePot",
-        "stockQuantityPot",
+        "price",
+        "stockQuantity",
         "variety",
         "perfume",
         "size",
         "color",
       ],
+      where: { type: "Pot" },
       include: [
         {
           model: PicturesItem,
@@ -40,14 +42,16 @@ const itemsController = {
       attributes: [
         "itemId",
         "name",
-        "pricePot",
-        "stockQuantityPot",
+        "type",
+        "price",
+        "stockQuantity",
         "variety",
         "perfume",
         "size",
         "color",
       ],
       where: {
+        type: "Pot",
         [Op.and]: [
           color ? { color } : {},
           variety ? { variety } : {},
@@ -69,15 +73,15 @@ const itemsController = {
     });
   },
 
-  getItem: async (itemId) => {
-    const item = await Items.findByPk(itemId, {
+  getItem: async (name) => {
+    const roseName = name.replace("+", " ");
+    const item = await Items.findAll({
       attributes: [
         "itemId",
         "name",
-        "pricePot",
-        "stockQuantityPot",
-        "priceRoot",
-        "stockQuantityRoot",
+        "type",
+        "price",
+        "stockQuantity",
         "variety",
         "perfume",
         "size",
@@ -87,6 +91,9 @@ const itemsController = {
         "plantationCare",
         "idealFor",
       ],
+      where: {
+        name: roseName,
+      },
       include: [
         {
           model: PicturesItem,

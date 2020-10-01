@@ -23,12 +23,14 @@ const usersController = {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
+
     const newUser = await Users.create({
       firstName,
       lastName,
       email,
       password: hashedPassword,
     });
+
     const newUserDTO = await userTDO.convert2DTO(newUser);
 
     return newUserDTO;

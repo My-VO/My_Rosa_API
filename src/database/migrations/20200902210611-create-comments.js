@@ -1,6 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Comments', {
+    await queryInterface.createTable("Comments", {
       comment_id: {
         allowNull: false,
         autoIncrement: true,
@@ -10,23 +10,23 @@ module.exports = {
       user_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        onDelete: 'CASCADE',
+        onDelete: "CASCADE",
         references: {
           model: {
-            tableName: 'Users',
+            tableName: "Users",
           },
-          key: 'user_id',
+          key: "user_id",
         },
       },
       item_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        onDelete: 'CASCADE',
+        onDelete: "CASCADE",
         references: {
           model: {
-            tableName: 'Items',
+            tableName: "Items",
           },
-          key: 'item_id',
+          key: "item_id",
         },
       },
       comment: {
@@ -48,6 +48,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Comments');
+    await queryInterface.dropTable("Comments");
   },
 };

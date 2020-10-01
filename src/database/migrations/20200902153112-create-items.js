@@ -9,19 +9,20 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
+      type: {
+        allowNull: false,
         type: Sequelize.TEXT,
       },
-      price_pot: {
+      name: {
+        allowNull: false,
+        type: Sequelize.TEXT,
+      },
+      price: {
+        allowNull: false,
         type: Sequelize.BIGINT,
       },
-      stock_quantity_pot: {
-        type: Sequelize.INTEGER,
-      },
-      price_root: {
-        type: Sequelize.BIGINT,
-      },
-      stock_quantity_root: {
+      stock_quantity: {
+        allowNull: false,
         type: Sequelize.INTEGER,
       },
       variety: {
@@ -60,6 +61,7 @@ module.exports = {
       },
     });
   },
+
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable("Items");
   },
