@@ -1,4 +1,3 @@
-const { request } = require("express");
 const {
   Users,
   Orders,
@@ -10,16 +9,15 @@ const {
 } = require("../models");
 
 const confirmedItems = async (orderItems, orderId) => {
-  const { items } = orderItems;
-
   return Promise.all(
-    items.map(async (orderItem) => {
+    orderItems.map(async (orderItem) => {
       const { itemId, quantityOrder } = orderItem;
       const newItem = await OrderItems.create({
         orderId,
         itemId,
         quantityOrder,
       });
+
       return newItem.dataValues;
     })
   );

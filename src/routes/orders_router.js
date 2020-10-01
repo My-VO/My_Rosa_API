@@ -15,8 +15,8 @@ ordersRouter.post(
     const { userId } = request.user;
     const data = request.body;
 
-    for (let i = 0; i < data.items.length; i++) {
-      const { itemId, quantityOrder } = data.items[i];
+    for (let i = 0; i < data.length; i++) {
+      const { itemId, quantityOrder } = data[i];
 
       if (itemId == null || typeof itemId !== "number") {
         throw new BadRequestError(
