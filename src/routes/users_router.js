@@ -14,7 +14,7 @@ usersRouter.get(
   "/user/me",
   authMid.authenticateJWT,
   async (request, reponse) => {
-    const user = await usersController.getUser(request.user.userId);
+    const user = await usersController.getUserById(request.user.userId);
 
     reponse.status(OK);
     reponse.json({ token: authMid.generateToken(user), user });

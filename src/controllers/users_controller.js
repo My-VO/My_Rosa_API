@@ -64,10 +64,14 @@ const usersController = {
     return findUserByEmailDTO;
   },
 
-  getUser: async (userId) => {
+  getUserById: async (userId) => {
     const findUser = await Users.findByPk(userId);
 
-    return findUser;
+    const findUserDTO = await userTDO.convert2DTO(findUser);
+
+    return findUserDTO;
+
+    // return findUser;
   },
 };
 

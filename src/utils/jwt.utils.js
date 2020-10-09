@@ -10,7 +10,7 @@ const accessTokenSecret = process.env.JWT_SIGN_SECRET;
 module.exports = {
   generateToken: (userData) => {
     // eslint-disable-next-line no-console
-    console.log("userData : ", userData);
+    // console.log("userData : ", userData);
     return jwt.sign(
       {
         userId: userData.id,
