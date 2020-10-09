@@ -63,6 +63,12 @@ const usersController = {
 
     return findUserByEmailDTO;
   },
+
+  getUser: async (userId) => {
+    const findUser = await Users.findByPk(userId);
+
+    return findUser;
+  },
 };
 
 module.exports = usersController;
