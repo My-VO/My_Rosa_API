@@ -18,7 +18,7 @@ const itemsController = {
         "size",
         "color",
       ],
-      where: { type: "Pot" },
+      where: { type: "En Conteneur de 4L/5L" },
       include: [
         {
           model: PicturesItem,
@@ -51,7 +51,7 @@ const itemsController = {
         "color",
       ],
       where: {
-        type: "Pot",
+        type: "En Conteneur de 4L/5L",
         [Op.and]: [
           color ? { color } : {},
           variety ? { variety } : {},

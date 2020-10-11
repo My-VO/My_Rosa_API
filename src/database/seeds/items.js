@@ -5,7 +5,7 @@ const now = moment().utc().toDate();
 module.exports = [
   {
     item_id: 1,
-    type: "Pot",
+    type: "En Conteneur de 4L/5L",
     name: "Pierre de Ronsard",
     price: 22.5,
     stock_quantity: 10,
@@ -25,7 +25,7 @@ module.exports = [
   },
   {
     item_id: 2,
-    type: "Pot",
+    type: "En Conteneur de 4L/5L",
     name: "EUSTACIA VYE",
     price: 32.5,
     stock_quantity: 40,
@@ -45,7 +45,7 @@ module.exports = [
   },
   {
     item_id: 3,
-    type: "Pot",
+    type: "En Conteneur de 4L/5L",
     name: "CLAIRE AUSTIN",
     price: 28.95,
     stock_quantity: 27,
@@ -65,7 +65,7 @@ module.exports = [
   },
   {
     item_id: 4,
-    type: "Pot",
+    type: "En Conteneur de 4L/5L",
     name: "ROALD DAHL",
     price: 28.95,
     stock_quantity: 11,
@@ -85,7 +85,7 @@ module.exports = [
   },
   {
     item_id: 5,
-    type: "Pot",
+    type: "En Conteneur de 4L/5L",
     name: "CHARLES DARWIN",
     price: 28.95,
     stock_quantity: 32,
@@ -104,7 +104,7 @@ module.exports = [
   },
   {
     item_id: 6,
-    type: "Root",
+    type: "À Racines Nues",
     name: "Pierre de Ronsard",
     price: 16.5,
     stock_quantity: 50,
@@ -124,7 +124,7 @@ module.exports = [
   },
   {
     item_id: 7,
-    type: "Root",
+    type: "À Racines Nues",
     name: "EUSTACIA VYE",
     price: 25.5,
     stock_quantity: 30,
@@ -144,7 +144,7 @@ module.exports = [
   },
   {
     item_id: 8,
-    type: "Root",
+    type: "À Racines Nues",
     name: "CLAIRE AUSTIN",
     price: 21.95,
     stock_quantity: 60,
@@ -164,7 +164,7 @@ module.exports = [
   },
   {
     item_id: 9,
-    type: "Root",
+    type: "À Racines Nues",
     name: "ROALD DAHL",
     price: 21.95,
     stock_quantity: 30,
@@ -184,7 +184,7 @@ module.exports = [
   },
   {
     item_id: 10,
-    type: "Root",
+    type: "À Racines Nues",
     name: "CHARLES DARWIN",
     price: 21.95,
     stock_quantity: 50,
