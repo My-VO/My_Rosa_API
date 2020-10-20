@@ -25,7 +25,7 @@ ordersRouter.post(
         );
       }
 
-      if (quantityOrder == null || typeof itemId !== "number") {
+      if (quantityOrder == null || typeof quantityOrder !== "number") {
         throw new BadRequestError(
           "Requête incorrecte",
           "Le champ quantity_order n'est pas renseigné"

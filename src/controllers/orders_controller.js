@@ -9,15 +9,22 @@ const {
   sequelize,
 } = require("../models");
 
-const confirmedItems = async (orderItems, orderId) => {
+const confirmedItems = async (orderItems, orderId, transaction) => {
   return Promise.all(
     orderItems.map(async (orderItem) => {
       const { itemId, quantityOrder } = orderItem;
-      const newItem = await OrderItems.create({
-        orderId,
-        itemId,
-        quantityOrder,
-      });
+
+      console.log("itemId : ", itemId);
+      console.log("orderId : ", orderId);
+
+      const newItem = await OrderItems.create(
+        {
+          orderId,
+          itemId,
+          quantityOrder,
+        },
+        { transaction }
+      );
 
       return newItem.dataValues;
     })
@@ -47,7 +54,7 @@ const ordersController = {
         { transaction }
       );
 
-      await confirmedItems(data, newOrder.dataValues.orderId, { transaction });
+      await confirmedItems(data, newOrder.dataValues.orderId, transaction);
 
       const confirmedOrder = Orders.findByPk(newOrder.orderId, {
         attributes: ["orderId", "userId"],
@@ -90,7 +97,7 @@ const ordersController = {
       if (transaction) {
         await transaction.rollback();
       }
-      console.log("Err", err);
+      console.log("Err : ", err);
     }
   },
 

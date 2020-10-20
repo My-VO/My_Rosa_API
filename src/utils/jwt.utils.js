@@ -28,8 +28,12 @@ module.exports = {
     if (authHeader) {
       const token = authHeader.split(" ")[1];
 
-      console.log("token : ", token);
-
+      if (token === "null") {
+        throw new UnauthorrizedError(
+          "Accès refusé",
+          "Vous devez être connecté pour accéder à cette ressource"
+        );
+      }
       // eslint-disable-next-line consistent-return
       jwt.verify(token, accessTokenSecret, (error, user) => {
         if (error) {
