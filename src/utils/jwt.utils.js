@@ -28,6 +28,8 @@ module.exports = {
     if (authHeader) {
       const token = authHeader.split(" ")[1];
 
+      console.log("token : ", token);
+
       // eslint-disable-next-line consistent-return
       jwt.verify(token, accessTokenSecret, (error, user) => {
         if (error) {

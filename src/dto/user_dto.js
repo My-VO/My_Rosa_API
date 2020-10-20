@@ -1,6 +1,5 @@
 const userDTO = {
   convert2DTO: async (user) => {
-    console.log({ user });
     return {
       id: user.userId,
       first_name: user.firstName,

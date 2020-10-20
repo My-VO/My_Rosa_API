@@ -8,7 +8,7 @@ module.exports = [
     first_name: "My",
     last_name: "Rosa",
     email: "my@rosa.com.fr",
-    password: "$2b$10$b7.UoLIcuxmaBn8NPjZSJOVe4ciOpx64SOGkquJOAAKvsbZpIDEA6",
+    password: "$2y$10$plmEJw23mwBNxAhDvG3qJ.GtWbuXM11mPuPxjU1mnk1FYLvtbv5Da",
     created_at: now,
     updated_at: now,
   },

@@ -9,12 +9,12 @@ const { Users } = db;
 
 describe("Controllers :: UsersController :: Integration", () => {
   describe("#addUser", () => {
-    it("it should return the right object", async () => {
+    it.skip("it should return the right object", async () => {
       // Given
       const data = {
         firstName: "My",
         lastName: "Rosa",
-        email: "myrosa@com.fr",
+        email: "myrosa@rosa.fr",
         password: "azertyazerty123",
       };
 
@@ -22,25 +22,26 @@ describe("Controllers :: UsersController :: Integration", () => {
       const newUser = await usersController.addUser(data);
 
       // Then
-      expect(newUser).to.have.property(firstName);
-      expect(newUser.firstName).to.equal(data.firstName);
-      expect(newUser).to.have.property(lastName);
-      expect(newUser.lastName).to.equal(data.lastName);
-      expect(newUser).to.have.property(email);
+      expect(newUser).to.have.property("first_name");
+      expect(newUser.first_name).to.equal(data.firstName);
+      expect(newUser).to.have.property("last_name");
+      expect(newUser.last_name).to.equal(data.lastName);
+      expect(newUser).to.have.property("email");
       expect(newUser.email).to.equal(data.email);
-      expect(newUser).to.have.property(password);
+      expect(newUser).to.have.property("password");
     });
   });
 });
 
 describe("Controllers :: UsersController :: Unit", () => {
   describe("#addUser", () => {
-    it.skip("should execute hash password method", async () => {
+    it("should execute hash password method", async () => {
       // Given
       const data = {
+        userId: 2,
         firstName: "My",
         lastName: "Rosa",
-        email: "myrosa@com.fr",
+        email: "myrosa@com.vn",
         password: "azertyazerty123",
       };
 
@@ -56,10 +57,11 @@ describe("Controllers :: UsersController :: Unit", () => {
     it.skip("should execute create method", async () => {
       // Given
       const data = {
+        userId: 3,
         firstName: "My",
         lastName: "Rosa",
-        email: "myrosa@com.fr",
-        password: "azertyazerty123",
+        email: "myrosafr@com.fr",
+        // password: "azertyazerty123",
       };
 
       const createStub = sinon.stub(Users, "create");

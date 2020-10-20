@@ -6,6 +6,7 @@ const {
   Status,
   Items,
   PicturesItem,
+  sequelize,
 } = require("../models");
 
 const confirmedItems = async (orderItems, orderId) => {
@@ -25,50 +26,72 @@ const confirmedItems = async (orderItems, orderId) => {
 
 const ordersController = {
   addOrder: async (data, userId) => {
-    const newOrder = await Orders.create({
-      userId,
-    });
+    let transaction;
 
-    await OrdersStatus.create({
-      orderId: newOrder.dataValues.orderId,
-      statusId: 1,
-    });
+    try {
+      // start a new transaction
+      transaction = await sequelize.transaction();
 
-    await confirmedItems(data, newOrder.dataValues.orderId);
-
-    const confirmedOrder = Orders.findByPk(newOrder.orderId, {
-      attributes: ["orderId", "userId"],
-      include: [
+      const newOrder = await Orders.create(
         {
-          model: Users,
-          attributes: ["firstName", "lastName"],
+          userId,
         },
-        {
-          model: OrdersStatus,
-          attibutes: ["statusId"],
-          include: [{ model: Status, attributes: ["description"] }],
-        },
-        {
-          model: OrderItems,
-          attributes: ["itemId", "quantityOrder"],
-          include: [
-            {
-              model: Items,
-              attributes: ["name", "variety", "price", "type"],
-              include: [
-                {
-                  model: PicturesItem,
-                  attributes: ["picture"],
-                },
-              ],
-            },
-          ],
-          order: [["itemId", "ASC"]],
-        },
-      ],
-    });
+        { transaction }
+      );
 
-    return confirmedOrder;
+      await OrdersStatus.create(
+        {
+          orderId: newOrder.dataValues.orderId,
+          statusId: 1,
+        },
+        { transaction }
+      );
+
+      await confirmedItems(data, newOrder.dataValues.orderId, { transaction });
+
+      const confirmedOrder = Orders.findByPk(newOrder.orderId, {
+        attributes: ["orderId", "userId"],
+        include: [
+          {
+            model: Users,
+            attributes: ["firstName", "lastName"],
+          },
+          {
+            model: OrdersStatus,
+            attibutes: ["statusId"],
+            include: [{ model: Status, attributes: ["description"] }],
+          },
+          {
+            model: OrderItems,
+            attributes: ["itemId", "quantityOrder"],
+            include: [
+              {
+                model: Items,
+                attributes: ["name", "variety", "price", "type"],
+                include: [
+                  {
+                    model: PicturesItem,
+                    attributes: ["picture"],
+                  },
+                ],
+              },
+            ],
+            order: [["itemId", "ASC"]],
+          },
+        ],
+      });
+
+      // if we get here they ran successfully, so...
+      await transaction.commit();
+
+      return confirmedOrder;
+    } catch (err) {
+      // if we got an error and we created the transaction, roll it back
+      if (transaction) {
+        await transaction.rollback();
+      }
+      console.log("Err", err);
+    }
   },
 
   // eslint-disable-next-line no-shadow

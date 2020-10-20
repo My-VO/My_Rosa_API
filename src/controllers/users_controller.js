@@ -8,7 +8,6 @@ const UnauthorrizedError = require("../helpers/errors/unauthorized_error");
 
 const usersController = {
   addUser: async (data) => {
-    console.log({ data });
     const { firstName, lastName, email, password } = data;
 
     const findEmail = await Users.findOne({
@@ -16,7 +15,6 @@ const usersController = {
       where: { email },
     });
 
-    console.log({ findEmail });
     if (findEmail) {
       throw new ConflictError(
         "Conflit",
@@ -26,9 +24,6 @@ const usersController = {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    console.log({ password });
-    console.log({ hashedPassword });
-
     const newUser = await Users.create({
       firstName,
       lastName,
@@ -36,11 +31,9 @@ const usersController = {
       password: hashedPassword,
     });
 
-    console.log({ newUser });
-
     const newUserDTO = await userTDO.convert2DTO(newUser);
 
-    return newUser;
+    return newUserDTO;
   },
 
   authenticate: async (data) => {
@@ -77,8 +70,6 @@ const usersController = {
     const findUserDTO = await userTDO.convert2DTO(findUser);
 
     return findUserDTO;
-
-    // return findUser;
   },
 };
 
