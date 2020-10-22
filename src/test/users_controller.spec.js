@@ -3,14 +3,14 @@ const sinon = require("sinon");
 const bcrypt = require("bcrypt");
 
 const db = require("../models");
-const usersController = require("./users_controller");
+const usersController = require("../controllers/users_controller");
 
 const { Users } = db;
 const { userTDO } = require("../dto");
 
 describe("Controllers :: UsersController :: Integration", () => {
   describe("#addUser", () => {
-    it("it should return the right object", async () => {
+    it.skip("it should return a new user DTO ", async () => {
       // Given
       const data = {
         firstName: "My",
@@ -35,15 +35,11 @@ describe("Controllers :: UsersController :: Integration", () => {
 
 describe("Controllers :: UsersController :: Unit", () => {
   describe("#addUser", () => {
-    it("should execute create method", async () => {
+    it("it should execute addUser method ", async () => {
       // Given
-      const data = {
-        firstName: "My",
-        lastName: "Rosa",
-        email: "myrosa@com.fr",
-        password: "azertyazerty123",
-      };
+      const data = {};
 
+      const hashedPasswordStub = sinon.stub(bcrypt, "hash");
       const createStub = sinon.stub(Users, "create");
       const createStubConvert2DTO = sinon.stub(userTDO, "convert2DTO");
 
@@ -51,6 +47,7 @@ describe("Controllers :: UsersController :: Unit", () => {
       await usersController.addUser(data);
 
       // Then
+      expect(hashedPasswordStub.calledOnce).to.be.true;
       expect(createStub.calledOnce).to.be.true;
       expect(createStubConvert2DTO.calledOnce).to.be.true;
     });

@@ -4,7 +4,6 @@ const now = moment().utc().toDate();
 
 module.exports = [
   {
-    user_id: 1,
     first_name: "My",
     last_name: "Rosa",
     email: "my@rosa.com.fr",

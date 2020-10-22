@@ -4,7 +4,6 @@ const now = moment().utc().toDate();
 
 module.exports = [
   {
-    item_id: 1,
     type: "En Conteneur de 4L/5L",
     name: "Pierre de Ronsard",
     price: 22.5,
@@ -24,7 +23,6 @@ module.exports = [
     updated_at: now,
   },
   {
-    item_id: 2,
     type: "En Conteneur de 4L/5L",
     name: "EUSTACIA VYE",
     price: 32.5,
@@ -44,7 +42,6 @@ module.exports = [
     updated_at: now,
   },
   {
-    item_id: 3,
     type: "En Conteneur de 4L/5L",
     name: "CLAIRE AUSTIN",
     price: 24.95,
@@ -64,7 +61,6 @@ module.exports = [
     updated_at: now,
   },
   {
-    item_id: 4,
     type: "En Conteneur de 4L/5L",
     name: "ROALD DAHL",
     price: 28.95,
@@ -84,7 +80,6 @@ module.exports = [
     updated_at: now,
   },
   {
-    item_id: 5,
     type: "En Conteneur de 4L/5L",
     name: "CHARLES DARWIN",
     price: 25.95,
@@ -103,7 +98,6 @@ module.exports = [
     updated_at: now,
   },
   {
-    item_id: 6,
     type: "À Racines Nues",
     name: "Pierre de Ronsard",
     price: 16.5,
@@ -123,7 +117,6 @@ module.exports = [
     updated_at: now,
   },
   {
-    item_id: 7,
     type: "À Racines Nues",
     name: "EUSTACIA VYE",
     price: 18.5,
@@ -143,7 +136,6 @@ module.exports = [
     updated_at: now,
   },
   {
-    item_id: 8,
     type: "À Racines Nues",
     name: "CLAIRE AUSTIN",
     price: 15.95,
@@ -163,7 +155,6 @@ module.exports = [
     updated_at: now,
   },
   {
-    item_id: 9,
     type: "À Racines Nues",
     name: "ROALD DAHL",
     price: 18.95,
@@ -183,7 +174,6 @@ module.exports = [
     updated_at: now,
   },
   {
-    item_id: 10,
     type: "À Racines Nues",
     name: "CHARLES DARWIN",
     price: 17.95,
