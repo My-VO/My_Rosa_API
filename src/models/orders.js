@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.INTEGER,
       },
+      priceTotal: {
+        field: "price_total",
+        type: DataTypes.DOUBLE(10, 2),
+      },
       createdAt: {
         field: "created_at",
         allowNull: false,

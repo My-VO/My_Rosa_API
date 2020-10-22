@@ -19,7 +19,7 @@ module.exports = {
       },
       price: {
         allowNull: false,
-        type: Sequelize.BIGINT,
+        type: Sequelize.DOUBLE(3, 2),
       },
       stock_quantity: {
         allowNull: false,

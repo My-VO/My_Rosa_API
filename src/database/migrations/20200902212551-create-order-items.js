@@ -32,6 +32,9 @@ module.exports = {
       quantity_order: {
         type: Sequelize.INTEGER,
       },
+      price_total_item: {
+        type: Sequelize.DOUBLE(10, 2),
+      },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE,

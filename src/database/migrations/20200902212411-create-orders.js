@@ -18,6 +18,9 @@ module.exports = {
           key: "user_id",
         },
       },
+      price_total: {
+        type: Sequelize.DOUBLE(10, 2),
+      },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE,

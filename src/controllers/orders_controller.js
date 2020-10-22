@@ -12,16 +12,15 @@ const {
 const confirmedItems = async (orderItems, orderId, transaction) => {
   return Promise.all(
     orderItems.map(async (orderItem) => {
-      const { itemId, quantityOrder } = orderItem;
+      const { itemId, quantityOrder, price } = orderItem;
 
-      console.log("itemId : ", itemId);
-      console.log("orderId : ", orderId);
-
+      const priceTotalItem = price * quantityOrder;
       const newItem = await OrderItems.create(
         {
           orderId,
           itemId,
           quantityOrder,
+          priceTotalItem,
         },
         { transaction }
       );
@@ -31,9 +30,22 @@ const confirmedItems = async (orderItems, orderId, transaction) => {
   );
 };
 
+const priceTotalOrder = async (orderItems) => {
+  // eslint-disable-next-line no-shadow
+  let priceTotalOrder = 0;
+  orderItems.map(async (orderItem) => {
+    const { quantityOrder, price } = orderItem;
+
+    priceTotalOrder += price * quantityOrder;
+  });
+  return priceTotalOrder;
+};
+
 const ordersController = {
   addOrder: async (data, userId) => {
     let transaction;
+
+    const priceTotal = await priceTotalOrder(data);
 
     try {
       // start a new transaction
@@ -42,6 +54,7 @@ const ordersController = {
       const newOrder = await Orders.create(
         {
           userId,
+          priceTotal,
         },
         { transaction }
       );
@@ -57,7 +70,7 @@ const ordersController = {
       await confirmedItems(data, newOrder.dataValues.orderId, transaction);
 
       const confirmedOrder = Orders.findByPk(newOrder.orderId, {
-        attributes: ["orderId", "userId"],
+        attributes: ["orderId", "userId", "priceTotal"],
         include: [
           {
             model: Users,
@@ -70,7 +83,7 @@ const ordersController = {
           },
           {
             model: OrderItems,
-            attributes: ["itemId", "quantityOrder"],
+            attributes: ["itemId", "quantityOrder", "priceTotalItem"],
             include: [
               {
                 model: Items,
@@ -106,7 +119,7 @@ const ordersController = {
     const { userId } = request.user;
 
     const orderList = await Orders.findAll({
-      attributes: ["orderId", "userId", "createdAt", "updatedAt"],
+      attributes: ["orderId", "userId", "priceTotal", "createdAt", "updatedAt"],
       where: {
         userId,
       },
@@ -122,7 +135,7 @@ const ordersController = {
         },
         {
           model: OrderItems,
-          attributes: ["itemId", "quantityOrder"],
+          attributes: ["itemId", "quantityOrder", "priceTotalItem"],
           include: [
             {
               model: Items,

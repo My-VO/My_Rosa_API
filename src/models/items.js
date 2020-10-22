@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       price: {
         allowNull: false,
-        type: DataTypes.BIGINT,
+        type: DataTypes.DOUBLE(3, 2),
       },
       stockQuantity: {
         field: "stock_quantity",
