@@ -1,4 +1,4 @@
-const userTDO = require("./user_dto");
+const userTDO = require("./user.dto");
 
 module.exports = {
   userTDO,

@@ -6,7 +6,7 @@ const authMid = require("../utils/jwt.utils");
 const { OK, CREATED } = require("../helpers/status_codes");
 const BadRequestError = require("../helpers/errors/bad_request_error");
 
-const usersController = require("../controllers/users_controller");
+const usersController = require("../controllers/users.controller");
 
 const usersRouter = express.Router();
 

@@ -2,7 +2,7 @@ const express = require("express");
 
 const { OK } = require("../helpers/status_codes");
 
-const itemsController = require("../controllers/items_controller");
+const itemsController = require("../controllers/items.controller");
 
 const itemsRouter = express.Router();
 

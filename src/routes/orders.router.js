@@ -2,7 +2,7 @@ const express = require("express");
 
 const authMid = require("../utils/jwt.utils");
 
-const ordersController = require("../controllers/orders_controller");
+const ordersController = require("../controllers/orders.controller");
 const { CREATED, OK } = require("../helpers/status_codes");
 const BadRequestError = require("../helpers/errors/bad_request_error");
 

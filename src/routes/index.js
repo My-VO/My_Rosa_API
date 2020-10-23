@@ -2,9 +2,9 @@ const express = require("express");
 require("express-async-errors");
 
 const mainRouter = express.Router();
-const usersRouter = require("./users_router");
-const itemsRouter = require("./items_router");
-const ordersRouter = require("./orders_router");
+const usersRouter = require("./users.router");
+const itemsRouter = require("./items.router");
+const ordersRouter = require("./orders.router");
 
 const { OK } = require("../helpers/status_codes");
 
