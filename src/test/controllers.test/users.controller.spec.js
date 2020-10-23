@@ -112,4 +112,42 @@ describe("Controllers :: UsersController :: Unit", () => {
       expect(authUser).to.deep.equal(expectedAuthUser);
     });
   });
+
+  describe("#getUserById", () => {
+    it("should return the right object", async () => {
+      // Given
+      const data = {
+        userId: 2,
+        firstName: "My",
+        lastName: "Rosa",
+        email: "myrosafr@com.fr",
+      };
+
+      const findReturnUser = {
+        ...data,
+      };
+
+      const dataExpected = {
+        id: 2,
+        first_name: "My",
+        last_name: "Rosa",
+        email: "myrosafr@com.fr",
+      };
+
+      const expectedUser = {
+        ...dataExpected,
+      };
+
+      const findUserByPkStub = sinon
+        .stub(Users, "findByPk")
+        .returns(findReturnUser);
+
+      // When
+      const findUser = await usersController.getUserById(data);
+
+      // Then
+      expect(findUserByPkStub.calledOnce).to.be.true;
+      expect(findUser).to.deep.equal(expectedUser);
+    });
+  });
 });
