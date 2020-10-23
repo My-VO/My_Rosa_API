@@ -8,7 +8,7 @@
     "dev": "nodemon src/index.js",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "test": "mocha ./*/*/*.spec.js",
+    "test": "mocha ./*/test/*/*.spec.js",
     "test:watch": "mocha --watch *.spec.js"
   },
   "keywords": [

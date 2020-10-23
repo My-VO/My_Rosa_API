@@ -2,11 +2,10 @@ const { expect } = require("chai");
 const sinon = require("sinon");
 const bcrypt = require("bcrypt");
 
-const db = require("../models");
-const usersController = require("../controllers/users.controller");
+const db = require("../../models");
+const usersController = require("../../controllers/users.controller");
 
 const { Users } = db;
-const { userTDO } = require("../dto");
 
 describe("Controllers :: UsersController :: Integration", () => {
   describe("#addUser", () => {
@@ -69,6 +68,48 @@ describe("Controllers :: UsersController :: Unit", () => {
       expect(hashedPasswordStub.calledOnce).to.be.true;
       expect(createStub.calledOnce).to.be.true;
       expect(createdUser).to.deep.equal(expectedUser);
+    });
+  });
+
+  describe("#authenticate", () => {
+    it("should return the right object", async () => {
+      // Given
+      const data = {
+        userId: 2,
+        firstName: "My",
+        lastName: "Rosa",
+        email: "myrosafr@com.fr",
+        dataValues: { password: "azertyazerty123" },
+      };
+
+      const findReturnUser = {
+        ...data,
+      };
+
+      const dataExpected = {
+        id: 2,
+        first_name: "My",
+        last_name: "Rosa",
+        email: "myrosafr@com.fr",
+      };
+
+      const expectedAuthUser = {
+        ...dataExpected,
+      };
+
+      const findUserByEmailStub = sinon
+        .stub(Users, "findOne")
+        .returns(findReturnUser);
+
+      const checkPasswordStub = sinon.stub(bcrypt, "compare").returns(true);
+
+      // When
+      const authUser = await usersController.authenticate(data);
+
+      // Then
+      expect(findUserByEmailStub.calledOnce).to.be.true;
+      expect(checkPasswordStub.calledOnce).to.be.true;
+      expect(authUser).to.deep.equal(expectedAuthUser);
     });
   });
 });
