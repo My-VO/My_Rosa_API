@@ -8,9 +8,9 @@ const ordersRouter = require("./orders.router");
 
 const { OK } = require("../helpers/status_codes");
 
-mainRouter.get("/", (request, reponse) => {
-  reponse.status(OK);
-  reponse.json({ message: "Hello World!" });
+mainRouter.get("/", (request, response) => {
+  response.status(OK);
+  response.json({ message: "Hello World!" });
 });
 mainRouter.use(usersRouter);
 mainRouter.use(itemsRouter);

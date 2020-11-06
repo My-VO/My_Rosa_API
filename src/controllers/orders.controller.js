@@ -42,15 +42,19 @@ const priceTotalOrder = async (orderItems) => {
 };
 
 const ordersController = {
+  // eslint-disable-next-line consistent-return
   addOrder: async (data, userId) => {
     let transaction;
 
     const priceTotal = await priceTotalOrder(data);
 
     try {
-      // start a new transaction
+      // First, we start a transaction and save it into a variable
+      // Tout d'abord, on crée une transaction et on la sauve dans une variable
       transaction = await sequelize.transaction();
 
+      // Then, we do some calls passing this transaction as an option:
+      // Après, on fait des appels en passant cette variable comme une option:
       const newOrder = await Orders.create(
         {
           userId,
@@ -101,15 +105,22 @@ const ordersController = {
         ],
       });
 
-      // if we get here they ran successfully, so...
+      // If the execution reaches this line, no errors were thrown.
+      // We commit the transaction.
+      // Si l'excution arrive à cette line, aucune erreur est levée.
+      // On commit la transaction.
       await transaction.commit();
 
       return confirmedOrder;
     } catch (err) {
-      // if we got an error and we created the transaction, roll it back
+      // If the execution reaches this line, an error was thrown.
+      // We rollback the transaction.
+      // Si l'excution arrive à cette line, une erreur est levée.
+      // On rollback la transaction.
       if (transaction) {
         await transaction.rollback();
       }
+      // eslint-disable-next-line no-console
       console.log("Err : ", err);
     }
   },

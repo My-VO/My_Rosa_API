@@ -11,7 +11,7 @@ const ordersRouter = express.Router();
 ordersRouter.post(
   "/orders",
   authMid.authenticateJWT,
-  async (request, reponse) => {
+  async (request, response) => {
     const { userId } = request.user;
     const data = request.body;
 
@@ -35,19 +35,19 @@ ordersRouter.post(
 
     const newOrder = await ordersController.addOrder(data, userId);
 
-    reponse.status(CREATED);
-    reponse.json(newOrder);
+    response.status(CREATED);
+    response.json(newOrder);
   }
 );
 
 ordersRouter.get(
   "/orders",
   authMid.authenticateJWT,
-  async (request, reponse) => {
+  async (request, response) => {
     const ordersFound = await ordersController.getOrders(request);
 
-    reponse.status(OK);
-    reponse.json(ordersFound);
+    response.status(OK);
+    response.json(ordersFound);
   }
 );
 

@@ -13,15 +13,15 @@ const usersRouter = express.Router();
 usersRouter.get(
   "/user/me",
   authMid.authenticateJWT,
-  async (request, reponse) => {
+  async (request, response) => {
     const user = await usersController.getUserById(request.user.userId);
 
-    reponse.status(OK);
-    reponse.json({ token: authMid.generateToken(user), user });
+    response.status(OK);
+    response.json({ token: authMid.generateToken(user), user });
   }
 );
 
-usersRouter.post("/signup", async (request, reponse) => {
+usersRouter.post("/signup", async (request, response) => {
   const { firstName, lastName, email } = request.body;
 
   if (firstName === null || firstName === undefined || firstName === "") {
@@ -63,17 +63,17 @@ usersRouter.post("/signup", async (request, reponse) => {
 
   const newUser = await usersController.addUser(data);
 
-  reponse.status(CREATED);
-  reponse.json(newUser);
+  response.status(CREATED);
+  response.json(newUser);
 });
 
-usersRouter.post("/signin", async (request, reponse) => {
+usersRouter.post("/login", async (request, response) => {
   const data = request.body;
 
   const user = await usersController.authenticate(data);
 
-  reponse.status(OK);
-  reponse.json({ token: authMid.generateToken(user), user });
+  response.status(OK);
+  response.json({ token: authMid.generateToken(user), user });
 });
 
 module.exports = usersRouter;

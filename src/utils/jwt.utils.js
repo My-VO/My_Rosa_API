@@ -22,7 +22,7 @@ module.exports = {
     );
   },
 
-  authenticateJWT: (request, reponse, next) => {
+  authenticateJWT: (request, response, next) => {
     const authHeader = request.headers.authorization;
 
     if (authHeader) {
