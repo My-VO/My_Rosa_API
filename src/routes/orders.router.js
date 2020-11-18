@@ -2,7 +2,7 @@ const express = require("express");
 
 const authMid = require("../utils/jwt.utils");
 
-const ordersController = require("../controllers/orders_controller");
+const ordersController = require("../controllers/orders.controller");
 const { CREATED, OK } = require("../helpers/status_codes");
 const BadRequestError = require("../helpers/errors/bad_request_error");
 
@@ -11,7 +11,7 @@ const ordersRouter = express.Router();
 ordersRouter.post(
   "/orders",
   authMid.authenticateJWT,
-  async (request, reponse) => {
+  async (request, response) => {
     const { userId } = request.user;
     const data = request.body;
 
@@ -35,19 +35,19 @@ ordersRouter.post(
 
     const newOrder = await ordersController.addOrder(data, userId);
 
-    reponse.status(CREATED);
-    reponse.json(newOrder);
+    response.status(CREATED);
+    response.json(newOrder);
   }
 );
 
 ordersRouter.get(
   "/orders",
   authMid.authenticateJWT,
-  async (request, reponse) => {
+  async (request, response) => {
     const ordersFound = await ordersController.getOrders(request);
 
-    reponse.status(OK);
-    reponse.json(ordersFound);
+    response.status(OK);
+    response.json(ordersFound);
   }
 );
 

@@ -4,32 +4,27 @@ const now = moment().utc().toDate();
 
 module.exports = [
   {
-    status_id: 1,
-    description: "confirmation",
+    description: "Commande enregistrée",
     created_at: now,
     updated_at: now,
   },
   {
-    status_id: 2,
-    description: "en cours de préparation",
+    description: "Colis en attente de préparation",
     created_at: now,
     updated_at: now,
   },
   {
-    status_id: 3,
-    description: "en cours de livraison",
+    description: "Préparation du colis",
     created_at: now,
     updated_at: now,
   },
   {
-    status_id: 4,
-    description: "livré",
+    description: "Colis expédié",
     created_at: now,
     updated_at: now,
   },
   {
-    status_id: 5,
-    description: "annuler",
+    description: "Colis livré",
     created_at: now,
     updated_at: now,
   },

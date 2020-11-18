@@ -2,15 +2,15 @@ const express = require("express");
 require("express-async-errors");
 
 const mainRouter = express.Router();
-const usersRouter = require("./users_router");
-const itemsRouter = require("./items_router");
-const ordersRouter = require("./orders_router");
+const usersRouter = require("./users.router");
+const itemsRouter = require("./items.router");
+const ordersRouter = require("./orders.router");
 
 const { OK } = require("../helpers/status_codes");
 
-mainRouter.get("/", (request, reponse) => {
-  reponse.status(OK);
-  reponse.json({ message: "Hello World!" });
+mainRouter.get("/", (request, response) => {
+  response.status(OK);
+  response.json({ message: "Hello World!" });
 });
 mainRouter.use(usersRouter);
 mainRouter.use(itemsRouter);

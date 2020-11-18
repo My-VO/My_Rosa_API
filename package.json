@@ -8,7 +8,7 @@
     "dev": "nodemon src/index.js",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "test": "mocha ./*/*/*.spec.js",
+    "test": "mocha ./*/test/*/*.spec.js",
     "test:watch": "mocha --watch *.spec.js"
   },
   "keywords": [
@@ -60,5 +60,9 @@
     "pg-hstore": "^2.3.3",
     "sequelize": "^4.41.2",
     "sequelize-cli": "^6.2.0"
+  },
+  "engines": {
+    "node": "12.16.1",
+    "npm": "6.14.8"
   }
 }
