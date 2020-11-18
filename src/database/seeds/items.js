@@ -191,4 +191,42 @@ module.exports = [
     created_at: now,
     updated_at: now,
   },
+  {
+    type: "En Conteneur de 4L/5L",
+    name: "PHYLLIS BIDE",
+    price: 22.5,
+    stock_quantity: 10,
+    variety: "Rosier grimpant",
+    perfume: "Parfumée",
+    size_cm: 450,
+    color: "Rose",
+    flowering: "Remontante",
+    description:
+      "Il s'agit d'une rose de caractère vraiment rampant, qui a l'avantage de fleurir de façon répétée et fiable. Elle porte de délicieuses petites fleurs rose abricot pâle, d'un jaune pâle._Elles sont composées d'étroits pétales en forme de piquants, créant un effet très agréable, et ont un parfum doux et agréable.",
+    plantation_care:
+      "Orientation Nord, Est, Sud, Ouest. Tous les types de sol. Plein soleil. Lumière partielle du soleil",
+    ideal_for:
+      "Murs ou clôtures de 3 mètres. Une grande arche. Zones Ombragées.",
+    created_at: now,
+    updated_at: now,
+  },
+  {
+    type: "À Racines Nues",
+    name: "PHYLLIS BIDE",
+    price: 17.95,
+    stock_quantity: 50,
+    variety: "Rosier grimpant",
+    perfume: "Très parfumée",
+    size_cm: 450,
+    color: "Rose",
+    flowering: "Remontante",
+    description:
+      "Il s'agit d'une rose de caractère vraiment rampant, qui a l'avantage de fleurir de façon répétée et fiable. Elle porte de délicieuses petites fleurs rose abricot pâle, d'un jaune pâle._Elles sont composées d'étroits pétales en forme de piquants, créant un effet très agréable, et ont un parfum doux et agréable.",
+    plantation_care:
+      "Orientation Nord, Est, Sud, Ouest. Plein soleil. Tous les types de sol. Lumière partielle du soleil",
+    ideal_for:
+      "Murs ou clôtures de 3 mètres. Une grande arche. Zones Ombragées.",
+    created_at: now,
+    updated_at: now,
+  },
 ];

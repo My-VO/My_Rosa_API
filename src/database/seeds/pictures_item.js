@@ -73,4 +73,18 @@ module.exports = [
     created_at: now,
     updated_at: now,
   },
+  {
+    item_id: 11,
+    picture:
+      "https://cdn.shopify.com/s/files/1/0250/2157/9343/products/3f5df3552b22f60d633853ba008442a5_3f1ff650-c545-4e77-a0de-0b013479c356_1200x.jpg",
+    created_at: now,
+    updated_at: now,
+  },
+  {
+    item_id: 12,
+    picture:
+      "https://cdn.shopify.com/s/files/1/0250/2157/9343/products/3f5df3552b22f60d633853ba008442a5_3f1ff650-c545-4e77-a0de-0b013479c356_1200x.jpg",
+    created_at: now,
+    updated_at: now,
+  },
 ];

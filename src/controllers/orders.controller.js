@@ -50,7 +50,7 @@ const ordersController = {
 
     try {
       // First, we start a transaction and save it into a variable
-      // Tout d'abord, on crée une transaction et on la sauve dans une variable
+      // Tout d'abord, on crée une transaction et on la sauvegarde dans une variable
       transaction = await sequelize.transaction();
 
       // Then, we do some calls passing this transaction as an option:
@@ -107,7 +107,7 @@ const ordersController = {
 
       // If the execution reaches this line, no errors were thrown.
       // We commit the transaction.
-      // Si l'excution arrive à cette line, aucune erreur est levée.
+      // Si l'excution arrive à cette ligne, aucune erreur n'est levée.
       // On commit la transaction.
       await transaction.commit();
 
@@ -115,7 +115,7 @@ const ordersController = {
     } catch (err) {
       // If the execution reaches this line, an error was thrown.
       // We rollback the transaction.
-      // Si l'excution arrive à cette line, une erreur est levée.
+      // Si l'excution arrive à cette ligne, une erreur est levée.
       // On rollback la transaction.
       if (transaction) {
         await transaction.rollback();
