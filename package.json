@@ -17,7 +17,8 @@
     "sequelize",
     "rest",
     "api",
-    "postgresql"
+    "postgresql",
+    "heroku"
   ],
   "repository": {
     "type": "git",
